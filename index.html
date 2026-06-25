@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressure Calibration — Cost Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0e1014;
+    --surface:   #14171d;
+    --surface2:  #1c2028;
+    --line:      rgba(255,255,255,.07);
+    --ink:       #f0f2f5;
+    --mut:       #6b7585;
+    --dim:       #3d4452;
+    --red:       #d8503a;
+    --red-bg:    rgba(216,80,58,.08);
+    --red-line:  rgba(216,80,58,.2);
+    --green:     #4fae7a;
+    --green-bg:  rgba(79,174,122,.08);
+    --green-line:rgba(79,174,122,.2);
+    --amber:     #d9a443;
+  }
+
+  html { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── LANG TOGGLE ── */
+  .lang-bar {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+  .brand { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); }
+  .lang-toggle { display: flex; background: var(--surface2); border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+  .lang-btn {
+    padding: 7px 18px; font-size: 12px; font-weight: 600; letter-spacing: .5px;
+    cursor: pointer; border: none; background: transparent; color: var(--mut);
+    transition: all .15s;
+  }
+  .lang-btn.active { background: var(--dim); color: var(--ink); }
+
+  /* ── HEADER ── */
+  .header { width: 100%; max-width: 560px; margin-bottom: 32px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+  .title { font-size: 28px; font-weight: 800; line-height: 1.15; letter-spacing: -.5px; margin-bottom: 10px; }
+  .subtitle { font-size: 14px; color: var(--mut); line-height: 1.65; max-width: 460px; }
+
+  /* ── CARD ── */
+  .card {
+    width: 100%; max-width: 560px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+  .card-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--mut); margin-bottom: 18px;
+  }
+
+  /* ── INPUTS ── */
+  .input-grid { display: flex; flex-direction: column; gap: 16px; }
+  .input-group { display: flex; flex-direction: column; gap: 6px; }
+  .input-label { font-size: 13px; color: var(--mut); }
+  .input-wrap { position: relative; }
+  .input-prefix {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    font-size: 15px; font-weight: 600; color: var(--mut);
+    font-family: 'JetBrains Mono', monospace;
+    pointer-events: none;
+  }
+  .input-field {
+    width: 100%; background: var(--surface2); border: 1px solid var(--line);
+    color: var(--ink); border-radius: 10px; padding: 13px 14px 13px 32px;
+    font-size: 17px; font-weight: 600; font-family: 'JetBrains Mono', monospace;
+    transition: border-color .15s; appearance: none;
+  }
+  .input-field:focus { outline: none; border-color: var(--dim); }
+  .input-field::placeholder { color: var(--dim); font-weight: 400; }
+
+  /* ── LIVE METER ── */
+  .meter-card {
+    width: 100%; max-width: 560px;
+    background: var(--red-bg);
+    border: 1px solid var(--red-line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .meter-card.visible { display: block; }
+  .meter-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .meter-sub { font-size: 13px; color: var(--mut); margin-bottom: 20px; line-height: 1.5; }
+  .meter-num {
+    font-size: 52px; font-weight: 800; letter-spacing: -2px; color: var(--red);
+    font-family: 'JetBrains Mono', monospace; line-height: 1;
+    margin-bottom: 4px;
+    transition: opacity .1s;
+  }
+  .meter-caption { font-size: 12px; color: var(--mut); margin-bottom: 24px; }
+
+  /* ── BREAKDOWN TABLE ── */
+  .breakdown { margin-top: 4px; }
+  .bk-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--line); gap: 12px;
+  }
+  .bk-row:last-child { border-bottom: none; }
+  .bk-label { font-size: 13px; color: #cfd4dc; flex: 1; line-height: 1.4; }
+  .bk-val { font-size: 13px; font-weight: 700; color: var(--red); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  .bk-row.total .bk-label { font-weight: 700; color: var(--ink); }
+  .bk-row.total .bk-val { font-size: 16px; color: var(--red); }
+  .bk-divider { border-top: 1px solid rgba(255,255,255,.1); margin: 4px 0; }
+
+  /* ── SCENARIOS ── */
+  .scenarios {
+    width: 100%; max-width: 560px;
+    display: none; flex-direction: column; gap: 12px; margin-bottom: 12px;
+  }
+  .scenarios.visible { display: flex; }
+  .scenario-card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px;
+  }
+  .sc-head { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); margin-bottom: 14px; }
+  .sc-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--line); gap: 12px;
+  }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-label { font-size: 13px; color: #cfd4dc; flex: 1; line-height: 1.4; }
+  .sc-val { font-size: 13px; font-weight: 700; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  .sc-val.neg { color: var(--red); }
+  .sc-val.pos { color: var(--green); }
+  .sc-val.warn { color: var(--amber); }
+
+  /* ── REVENUE AT RISK ── */
+  .rev-card {
+    width: 100%; max-width: 560px;
+    background: rgba(217,164,67,.07);
+    border: 1px solid rgba(217,164,67,.2);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .rev-card.visible { display: block; }
+  .rev-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+  .rev-sub { font-size: 13px; color: var(--mut); margin-bottom: 20px; line-height: 1.5; }
+  .perf-slider-wrap { margin-bottom: 20px; }
+  .perf-slider-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .perf-slider-label { font-size: 13px; color: #cfd4dc; }
+  .perf-slider-val { font-size: 15px; font-weight: 700; color: var(--amber); font-family: 'JetBrains Mono', monospace; }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px; border-radius: 4px;
+    background: linear-gradient(to right, var(--amber) 0%, var(--amber) var(--pct, 40%), var(--dim) var(--pct, 40%), var(--dim) 100%);
+    outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    border-radius: 50%; background: var(--amber);
+    border: 3px solid var(--bg); cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--amber); border: 3px solid var(--bg); cursor: pointer;
+  }
+  .rv-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0; border-bottom: 1px solid rgba(217,164,67,.12); gap: 12px;
+  }
+  .rv-row:last-child { border-bottom: none; }
+  .rv-label-t { font-size: 13px; color: #cfd4dc; flex: 1; line-height: 1.4; }
+  .rv-val { font-size: 13px; font-weight: 700; color: var(--amber); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  .rv-val.big { font-size: 16px; color: var(--red); }
+  .rv-section-head { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mut); margin: 16px 0 8px; }
+  .rv-divider { border-top: 1px solid rgba(217,164,67,.15); margin: 12px 0; }
+  .rv-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 14px; background: rgba(216,80,58,.08);
+    border: 1px solid rgba(216,80,58,.2); border-radius: 10px; margin-top: 12px; gap: 12px;
+  }
+  .rv-total-label { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .rv-total-val { font-size: 18px; font-weight: 800; color: var(--red); font-family: 'JetBrains Mono', monospace; }
+  .saving-card {
+    width: 100%; max-width: 560px;
+    background: var(--green-bg);
+    border: 1px solid var(--green-line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .saving-card.visible { display: block; }
+  .saving-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+  .saving-sub { font-size: 13px; color: var(--mut); margin-bottom: 18px; line-height: 1.5; }
+  .saving-rows { display: flex; flex-direction: column; gap: 0; }
+  .sv-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--green-line); gap: 12px;
+  }
+  .sv-row:last-child { border-bottom: none; }
+  .sv-label { font-size: 13px; color: #cfd4dc; flex: 1; line-height: 1.4; }
+  .sv-val { font-size: 14px; font-weight: 700; color: var(--green); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  .saving-highlight {
+    margin-top: 18px; padding: 14px; border-radius: 10px;
+    background: rgba(79,174,122,.1); border: 1px solid var(--green-line);
+    font-size: 14px; line-height: 1.6; color: #cfd4dc;
+  }
+  .saving-highlight b { color: var(--green); }
+
+  /* ── CTA ── */
+  .cta-card {
+    width: 100%; max-width: 560px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px;
+    display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .cta-head { font-size: 16px; font-weight: 700; }
+  .cta-body { font-size: 13px; color: var(--mut); line-height: 1.6; }
+  .cta-btn {
+    display: block; width: 100%; padding: 15px;
+    background: var(--red); color: #fff; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    text-align: center; text-decoration: none;
+    transition: opacity .15s;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .cta-btn:hover { opacity: .88; }
+
+  /* ── FOOTNOTE ── */
+  .footnote {
+    width: 100%; max-width: 560px;
+    font-size: 11px; color: var(--mut); line-height: 1.6;
+    margin-top: 8px; opacity: .6;
+  }
+
+  /* ── INTEL CALLOUTS ── */
+  .intel {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 12px; margin-top: 14px;
+    background: rgba(255,255,255,.025); border-left: 2px solid var(--dim);
+    border-radius: 0 6px 6px 0;
+  }
+  .intel-icon { font-size: 11px; color: var(--mut); margin-top: 1px; flex-shrink: 0; }
+  .intel-text { font-size: 11px; color: var(--mut); line-height: 1.55; }
+  .intel-text b { color: #a0a8b4; }
+  .intel-text .intel-src { opacity: .5; }
+
+  /* ── PRESSURE SIGNALS ── */
+  .signals-card {
+    width: 100%; max-width: 560px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .signals-card.visible { display: block; }
+  .signals-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); margin-bottom: 6px; }
+  .signals-sub { font-size: 13px; color: var(--mut); line-height: 1.55; margin-bottom: 18px; }
+  .signal-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+    cursor: pointer; user-select: none;
+  }
+  .signal-row:last-of-type { border-bottom: none; }
+  .signal-toggle {
+    width: 36px; height: 20px; border-radius: 12px;
+    background: var(--dim); position: relative;
+    transition: background .2s; flex-shrink: 0; margin-top: 1px;
+  }
+  .signal-toggle::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--mut); transition: all .2s;
+  }
+  .signal-row.active .signal-toggle { background: var(--red); }
+  .signal-row.active .signal-toggle::after { left: 18px; background: #fff; }
+  .signal-content { flex: 1; }
+  .signal-title { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.35; margin-bottom: 3px; }
+  .signal-desc { font-size: 12px; color: var(--mut); line-height: 1.5; }
+  .signal-row.active .signal-title { color: var(--red); }
+  .signals-summary {
+    margin-top: 16px; padding: 14px;
+    border-radius: 10px; font-size: 13px; line-height: 1.6; color: #cfd4dc;
+    display: none;
+  }
+  .signals-summary.visible { display: block; }
+  .signals-summary b { color: var(--red); }
+  .signals-summary.level-low { background: rgba(79,174,122,.06); border: 1px solid rgba(79,174,122,.15); }
+  .signals-summary.level-low b { color: var(--green); }
+  .signals-summary.level-mid { background: rgba(217,164,67,.06); border: 1px solid rgba(217,164,67,.15); }
+  .signals-summary.level-mid b { color: var(--amber); }
+  .signals-summary.level-high { background: rgba(216,80,58,.06); border: 1px solid rgba(216,80,58,.15); }
+  .signals-summary.level-high b { color: var(--red); }
+
+  @media (max-width: 400px) {
+    .meter-num { font-size: 38px; }
+    .title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <div class="brand">Pressure Calibration</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</div>
+
+<div class="header">
+  <div class="eyebrow" data-t="eyebrow"></div>
+  <div class="title" data-t="title"></div>
+  <div class="subtitle" data-t="subtitle"></div>
+</div>
+
+<!-- INPUTS -->
+<div class="card">
+  <div class="card-label" data-t="inputsLabel"></div>
+  <div class="input-grid">
+    <div class="input-group">
+      <label class="input-label" data-t="salaryLabel"></label>
+      <div class="input-wrap">
+        <span class="input-prefix" id="currency-prefix">£</span>
+        <input class="input-field" id="salary" type="number" min="0" step="1000" data-ph="salaryPh" />
+      </div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" data-t="headcountLabel"></label>
+      <div class="input-wrap">
+        <input class="input-field" id="headcount" type="number" min="1" step="1" style="padding-left:14px" data-ph="headcountPh" />
+      </div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" data-t="dealSizeLabel"></label>
+      <div class="input-wrap">
+        <span class="input-prefix" id="currency-prefix-2">£</span>
+        <input class="input-field" id="deal-size" type="number" min="0" step="1000" data-ph="dealSizePh" />
+      </div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" data-t="dealsPerYearLabel"></label>
+      <div class="input-wrap">
+        <input class="input-field" id="deals-per-year" type="number" min="1" max="50" step="1" style="padding-left:14px" data-ph="dealsPerYearPh" />
+      </div>
+    </div>
+    <div class="input-group">
+      <label class="input-label" data-t="rampLabel"></label>
+      <div class="input-wrap">
+        <input class="input-field" id="ramp-months" type="number" min="1" max="18" step="1" style="padding-left:14px" data-ph="rampPh" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE METER -->
+<div class="meter-card" id="meter-card">
+  <div class="meter-label" data-t="meterLabel"></div>
+  <div class="meter-sub" data-t="meterSub"></div>
+  <div class="meter-num" id="meter-num">£0</div>
+  <div class="meter-caption" data-t="meterCaption"></div>
+  <div class="breakdown">
+    <div class="bk-row">
+      <span class="bk-label" data-t="bkReplace"></span>
+      <span class="bk-val" id="bk-replace">—</span>
+    </div>
+    <div class="bk-row">
+      <span class="bk-label" data-t="bkRamp"></span>
+      <span class="bk-val" id="bk-ramp">—</span>
+    </div>
+    <div class="bk-row">
+      <span class="bk-label" data-t="bkMgmt"></span>
+      <span class="bk-val" id="bk-mgmt">—</span>
+    </div>
+    <div class="bk-divider"></div>
+    <div class="bk-row total">
+      <span class="bk-label" data-t="bkTotal"></span>
+      <span class="bk-val" id="bk-total">—</span>
+    </div>
+  </div>
+  <div class="intel">
+    <span class="intel-icon">▸</span>
+    <span class="intel-text" data-t="intelHero"></span>
+  </div>
+</div>
+
+<!-- SCENARIOS -->
+<div class="scenarios" id="scenarios">
+  <div class="scenario-card">
+    <div class="sc-head" data-t="scHead2"></div>
+    <div class="sc-row">
+      <span class="sc-label" data-t="scTwo"></span>
+      <span class="sc-val neg" id="sc-two">—</span>
+    </div>
+    <div class="sc-row">
+      <span class="sc-label" id="sc-risk-label" data-t="scRisk"></span>
+      <span class="sc-val warn" id="sc-risk">—</span>
+    </div>
+    <div class="sc-row">
+      <span class="sc-label" data-t="scTurnover"></span>
+      <span class="sc-val warn" id="sc-turnover">—</span>
+    </div>
+    <div class="intel">
+      <span class="intel-icon">▸</span>
+      <span class="intel-text" data-t="intelTurnover"></span>
+    </div>
+  </div>
+</div>
+
+<!-- PRESSURE SIGNALS -->
+<div class="signals-card" id="signals-card">
+  <div class="signals-label" data-t="sigLabel"></div>
+  <div class="signals-sub" data-t="sigSub"></div>
+
+  <div class="signal-row" data-sig="sick">
+    <div class="signal-toggle"></div>
+    <div class="signal-content">
+      <div class="signal-title" data-t="sig1Title"></div>
+      <div class="signal-desc" data-t="sig1Desc"></div>
+    </div>
+  </div>
+
+  <div class="signal-row" data-sig="activity">
+    <div class="signal-toggle"></div>
+    <div class="signal-content">
+      <div class="signal-title" data-t="sig2Title"></div>
+      <div class="signal-desc" data-t="sig2Desc"></div>
+    </div>
+  </div>
+
+  <div class="signal-row" data-sig="weekday">
+    <div class="signal-toggle"></div>
+    <div class="signal-content">
+      <div class="signal-title" data-t="sig3Title"></div>
+      <div class="signal-desc" data-t="sig3Desc"></div>
+    </div>
+  </div>
+
+  <div class="signal-row" data-sig="recovery">
+    <div class="signal-toggle"></div>
+    <div class="signal-content">
+      <div class="signal-title" data-t="sig4Title"></div>
+      <div class="signal-desc" data-t="sig4Desc"></div>
+    </div>
+  </div>
+
+  <div class="signal-row" data-sig="discount">
+    <div class="signal-toggle"></div>
+    <div class="signal-content">
+      <div class="signal-title" data-t="sig5Title"></div>
+      <div class="signal-desc" data-t="sig5Desc"></div>
+    </div>
+  </div>
+
+  <div class="signal-row" data-sig="cycle">
+    <div class="signal-toggle"></div>
+    <div class="signal-content">
+      <div class="signal-title" data-t="sig6Title"></div>
+      <div class="signal-desc" data-t="sig6Desc"></div>
+    </div>
+  </div>
+
+  <div class="signals-summary" id="signals-summary"></div>
+</div>
+
+<!-- REVENUE AT RISK -->
+<div class="rev-card" id="rev-card">
+  <div class="rev-label" data-t="revLabel"></div>
+  <div class="rev-sub" data-t="revSub"></div>
+
+  <div class="perf-slider-wrap">
+    <div class="perf-slider-top">
+      <span class="perf-slider-label" data-t="sliderLabel"></span>
+      <span class="perf-slider-val" id="perf-pct-display">85%</span>
+    </div>
+    <input type="range" id="perf-slider" min="70" max="98" value="85" step="1" />
+    <div style="display:flex;justify-content:space-between;margin-top:5px;">
+      <span style="font-size:11px;color:var(--mut)" data-t="sliderLow"></span>
+      <span style="font-size:11px;color:var(--mut)" data-t="sliderHigh"></span>
+    </div>
+    <div class="intel" style="margin-top:10px; border-left-color: var(--amber);">
+      <span class="intel-icon">▸</span>
+      <span class="intel-text" data-t="intelDecision"></span>
+    </div>
+  </div>
+
+  <div class="rv-section-head" data-t="revScenA"></div>
+  <div class="rv-row">
+    <span class="rv-label-t" data-t="revDealsYear"></span>
+    <span class="rv-val" id="rv-deals-year">—</span>
+  </div>
+  <div class="rv-row">
+    <span class="rv-label-t" data-t="revDealsLost"></span>
+    <span class="rv-val" id="rv-deals-lost">—</span>
+  </div>
+  <div class="rv-row">
+    <span class="rv-label-t" data-t="revRevLost"></span>
+    <span class="rv-val big" id="rv-rev-lost">—</span>
+  </div>
+  <div class="intel" style="border-left-color: var(--amber);">
+    <span class="intel-icon">▸</span>
+    <span class="intel-text" data-t="intelQuota"></span>
+  </div>
+
+  <div class="rv-divider"></div>
+  <div class="rv-section-head" data-t="revScenB"></div>
+  <div class="rv-row">
+    <span class="rv-label-t" data-t="revRampDelay"></span>
+    <span class="rv-val" id="rv-ramp-delay">—</span>
+  </div>
+  <div class="rv-row">
+    <span class="rv-label-t" data-t="revRampDeals"></span>
+    <span class="rv-val" id="rv-ramp-deals">—</span>
+  </div>
+  <div class="rv-row">
+    <span class="rv-label-t" data-t="revRampRev"></span>
+    <span class="rv-val big" id="rv-ramp-rev">—</span>
+  </div>
+  <div class="intel" style="border-left-color: var(--amber);">
+    <span class="intel-icon">▸</span>
+    <span class="intel-text" data-t="intelAI"></span>
+  </div>
+
+  <div class="rv-total-row">
+    <span class="rv-total-label" data-t="revTotalLabel"></span>
+    <span class="rv-total-val" id="rv-total">—</span>
+  </div>
+</div>
+
+<!-- SAVING -->
+<div class="saving-card" id="saving-card">
+  <div class="saving-label" data-t="savingLabel"></div>
+  <div class="saving-sub" data-t="savingSub"></div>
+  <div class="saving-rows">
+    <div class="sv-row">
+      <span class="sv-label" data-t="svTeamCost"></span>
+      <span class="sv-val" id="sv-team-cost">—</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label" data-t="svPerCost"></span>
+      <span class="sv-val" id="sv-per-cost">—</span>
+    </div>
+    <div class="sv-row" style="border-top: 1px solid var(--green-line); margin-top:4px; padding-top:12px;">
+      <span class="sv-label" data-t="svOne"></span>
+      <span class="sv-val" id="sv-one">—</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label" data-t="svTwo"></span>
+      <span class="sv-val" id="sv-two">—</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label" data-t="svRoi"></span>
+      <span class="sv-val" id="sv-roi">—</span>
+    </div>
+  </div>
+  <div class="saving-highlight" id="saving-highlight"></div>
+</div>
+
+<!-- CTA -->
+<div class="cta-card">
+  <div class="cta-head" data-t="ctaHead"></div>
+  <div class="cta-body" data-t="ctaBody"></div>
+  <a href="mailto:hello@pressurecalibration.io" class="cta-btn" data-t="ctaBtn"></a>
+</div>
+
+<div class="footnote" data-t="footnote"></div>
+
+<script>
+// ─── TRANSLATIONS ─────────────────────────────────────────────────────────────
+var T = {
+  en: {
+    eyebrow:       "Revenue Leader Cost Calculator",
+    title:         "What is your team's pressure actually costing you?",
+    subtitle:      "Enter your numbers. We calculate the real financial cost of losing high performers, the pipeline revenue you're leaving on the table, and what prevention costs in comparison.",
+    inputsLabel:   "Your numbers",
+    salaryLabel:   "Average fully-loaded salary per person",
+    salaryPh:      "80000",
+    headcountLabel:"Number of people in your commercial team",
+    headcountPh:   "15",
+    dealSizeLabel: "Average deal size (ACV)",
+    dealSizePh:    "50000",
+    dealsPerYearLabel: "Deals closed per person last year",
+    dealsPerYearPh:    "8",
+    rampLabel:     "Typical ramp to full productivity (months)",
+    rampPh:        "7",
+    meterLabel:    "Cost of losing one person",
+    meterSub:      "If sustained pressure causes even one high performer to leave this year, here is the real cost.",
+    meterCaption:  "Total cost of one exit — recruiting, ramp, and management overhead",
+    bkReplace:     "Recruiting and onboarding (1.5× salary)",
+    bkRamp:        "Lost productivity during ramp",
+    bkMgmt:        "Management time and team disruption",
+    bkTotal:       "Total cost of one exit",
+    scHead2:       "If it happens again",
+    scTwo:         "Cost of two exits this year",
+    scRisk:        "People at risk of exit (25% turnover rate)",
+    scTurnover:    "Estimated annual turnover cost at current team size",
+    sigLabel:      "Pressure signals",
+    sigSub:        "You already have the evidence. Tick the ones you are seeing in your team right now.",
+    sig1Title:     "Sick days and unplanned absences are up",
+    sig1Desc:      "Average days off per person have crept up over the past year with no clear seasonal pattern.",
+    sig2Title:     "Pipeline activity is dropping while headcount is flat",
+    sig2Desc:      "Calls, emails, meetings booked per rep are down 10-20% quarter over quarter.",
+    sig3Title:     "Thursday/Friday performance is visibly worse than Monday",
+    sig3Desc:      "Close rates, call quality, or deal progression deteriorate noticeably through the week.",
+    sig4Title:     "Post-quarter recovery is taking longer than it used to",
+    sig4Desc:      "Used to take a week to ramp back after a sprint. Now it takes two or three.",
+    sig5Title:     "Discount rates are creeping up with no market explanation",
+    sig5Desc:      "Average discount has grown without changes in competition, product, or market conditions.",
+    sig6Title:     "Deal cycles are extending without added complexity",
+    sig6Desc:      "Average time to close has stretched even on deals that should be straightforward.",
+    savingLabel:   "What prevention costs",
+    savingSub:     "Pressure Calibration — 6-week programme for your commercial team.",
+    svTeamCost:    "Team programme — up to 10 people",
+    svPerCost:     "Individual rate — per person",
+    svOne:         "Keep one person — net saving",
+    svTwo:         "Keep two people — net saving",
+    svRoi:         "Return on investment (one exit prevented)",
+    revLabel:      "Pipeline impact",
+    revSub:        "Separate from the people cost above. What happens to your closed revenue when the team is grinding and when a seat is empty.",
+    sliderLabel:   "Your team is performing at what % of their potential?",
+    sliderLow:     "Significantly degraded",
+    sliderHigh:    "Nearly full capacity",
+    revScenA:      "Performance gap across the team",
+    revDealsYear:  "Deals per person per year (your input)",
+    revDealsLost:  "Deals not converting at expected rate per person",
+    revRevLost:    "Revenue gap across the team this year",
+    revScenB:      "Revenue missed while a seat is ramping",
+    revRampDelay:  "Your ramp period at 50% productivity",
+    revRampDeals:  "Deals missed during ramp",
+    revRampRev:    "Revenue missed from one vacant seat",
+    revTotalLabel: "Total pipeline impact (A + B)",
+    intelHero:     "In the average B2B sales team, <b>17% of reps generate 81% of revenue</b>. When a top performer exits, the cost is not proportional — it is structural. <span class='intel-src'>ZoomInfo / Everstage 2026</span>",
+    intelTurnover: "B2B sales rep turnover surged from <b>22% to 36% year-over-year</b> — the highest in 6 years and a 64% spike in replacement costs industry-wide. <span class='intel-src'>Gartner / ZoomInfo 2026</span>",
+    intelDecision: "Research shows <b>67% decision quality degradation</b> under sustained physical pressure — affecting close rates, negotiation quality, and deal management before the pipeline metrics register it. <span class='intel-src'>Fullcast GTM Benchmark</span>",
+    intelQuota:    "<b>69% of B2B reps missed quota in 2026</b> — attainment has fallen 9 points in 24 months with headcount held flat. The gap is not effort. It is what sustained pressure does to performance. <span class='intel-src'>Venli / Everstage / SPOTIO 2026</span>",
+    intelAI:       "<b>77% of employees report AI tools actually increased their workload</b>, despite 96% of C-suite leaders expecting the opposite. The efficiency dividend is not reaching the human layer. <span class='intel-src'>Culture Amp 2026</span>",
+    ctaHead:       "Let's look at this together",
+    ctaBody:       "20 minutes. We walk through where your team is under the most load, what it is costing in quota attainment and retention, and the highest-leverage move for you this quarter.",
+    ctaBtn:        "Book the call",
+    footnote:      "Methodology: replacement cost estimated at 1.5× fully-loaded salary (SHRM). Ramp productivity loss estimated at 50% of salary over your specified ramp period. Management overhead estimated at 10% of salary. Pipeline impact uses your deal count and deal size, applying the performance gap proportionally. Ramp period productivity modelled at 50%. Programme pricing: £20,000 for teams up to 10 people or £2,000 per person for a 6-week Pressure Calibration programme.",
+    currency:      "£",
+    locale:        "en-GB",
+    prog:          "£20,000 team programme"
+  },
+  es: {
+    eyebrow:       "Calculadora de costes para líderes comerciales",
+    title:         "¿Cuánto te está costando realmente la presión en tu equipo?",
+    subtitle:      "Introduce tus datos. Calculamos el coste real de perder high performers, los ingresos en pipeline que estás dejando en la mesa, y lo que cuesta la prevención en comparación.",
+    inputsLabel:   "Tus datos",
+    salaryLabel:   "Salario medio por persona, todo incluido",
+    salaryPh:      "70000",
+    headcountLabel:"Número de personas en tu equipo comercial",
+    headcountPh:   "15",
+    dealSizeLabel: "Tamaño medio del trato (ACV)",
+    dealSizePh:    "50000",
+    dealsPerYearLabel: "Tratos cerrados por persona el año pasado",
+    dealsPerYearPh:    "8",
+    rampLabel:     "Tiempo habitual de ramp hasta plena productividad (meses)",
+    rampPh:        "7",
+    meterLabel:    "Coste de perder una persona",
+    meterSub:      "Si la presión sostenida hace que un high performer se vaya este año, este es el coste real.",
+    meterCaption:  "Coste total de una salida — selección, ramp y tiempo de gestión",
+    bkReplace:     "Selección e incorporación (1,5× salario)",
+    bkRamp:        "Pérdida de productividad durante el ramp",
+    bkMgmt:        "Tiempo de gestión y disrupción del equipo",
+    bkTotal:       "Coste total de una salida",
+    scHead2:       "Si ocurre de nuevo",
+    scTwo:         "Coste de dos salidas este año",
+    scRisk:        "Personas en riesgo de salida (25% de rotación)",
+    scTurnover:    "Coste estimado de rotación anual al tamaño actual del equipo",
+    sigLabel:      "Señales de presión",
+    sigSub:        "Ya tienes la evidencia. Marca las que estás viendo en tu equipo ahora mismo.",
+    sig1Title:     "Las bajas y ausencias no planificadas han aumentado",
+    sig1Desc:      "Los días de baja por persona han ido subiendo en el último año sin un patrón estacional claro.",
+    sig2Title:     "La actividad de pipeline baja mientras el headcount no cambia",
+    sig2Desc:      "Llamadas, emails y reuniones agendadas por comercial han bajado un 10-20% trimestre a trimestre.",
+    sig3Title:     "El rendimiento del jueves/viernes es visiblemente peor que el lunes",
+    sig3Desc:      "Las tasas de cierre, la calidad de las llamadas o el avance de los tratos empeoran a lo largo de la semana.",
+    sig4Title:     "La recuperación post-trimestre tarda más que antes",
+    sig4Desc:      "Antes se tardaba una semana en volver al ritmo después de un sprint. Ahora tarda dos o tres.",
+    sig5Title:     "Los descuentos suben sin una explicación de mercado",
+    sig5Desc:      "El descuento medio ha crecido sin cambios en la competencia, el producto o las condiciones de mercado.",
+    sig6Title:     "Los ciclos de venta se alargan sin que la complejidad haya cambiado",
+    sig6Desc:      "El tiempo medio de cierre se ha estirado incluso en tratos que deberían ser directos.",
+    savingLabel:   "Lo que cuesta la prevención",
+    savingSub:     "Pressure Calibration — programa de 6 semanas para tu equipo comercial.",
+    svTeamCost:    "Programa de equipo — hasta 10 personas",
+    svPerCost:     "Tarifa individual — por persona",
+    svOne:         "Conservas una persona — ahorro neto",
+    svTwo:         "Conservas dos personas — ahorro neto",
+    svRoi:         "Retorno sobre la inversión (una salida evitada)",
+    revLabel:      "Impacto en pipeline",
+    revSub:        "Separado del coste de personas de arriba. Qué pasa con tus ingresos cerrados cuando el equipo está al límite y cuando un puesto está vacío.",
+    sliderLabel:   "¿A qué % de su potencial está rindiendo tu equipo?",
+    sliderLow:     "Significativamente degradado",
+    sliderHigh:    "Prácticamente a tope",
+    revScenA:      "Gap de rendimiento en el equipo",
+    revDealsYear:  "Tratos por persona al año (tu dato)",
+    revDealsLost:  "Tratos que no convierten al ritmo esperado por persona",
+    revRevLost:    "Gap de ingresos en el equipo este año",
+    revScenB:      "Ingresos perdidos mientras un puesto está en ramp",
+    revRampDelay:  "Tu período de ramp al 50% de productividad",
+    revRampDeals:  "Tratos perdidos durante el ramp",
+    revRampRev:    "Ingresos perdidos por un puesto vacante",
+    revTotalLabel: "Impacto total en pipeline (A + B)",
+    intelHero:     "En el equipo de ventas B2B medio, <b>el 17% de los comerciales genera el 81% de los ingresos</b>. Cuando un high performer se va, el coste no es proporcional — es estructural. <span class='intel-src'>ZoomInfo / Everstage 2026</span>",
+    intelTurnover: "La rotación de comerciales B2B saltó del <b>22% al 36% interanual</b> — la más alta en 6 años y un incremento del 64% en costes de sustitución en toda la industria. <span class='intel-src'>Gartner / ZoomInfo 2026</span>",
+    intelDecision: "La investigación muestra una <b>degradación del 67% en la calidad de las decisiones</b> bajo presión física sostenida — afectando a las tasas de cierre, la calidad de las negociaciones y la gestión de tratos antes de que las métricas de pipeline lo registren. <span class='intel-src'>Fullcast GTM Benchmark</span>",
+    intelQuota:    "<b>El 69% de los comerciales B2B no alcanzó cuota en 2026</b> — el cumplimiento ha caído 9 puntos en 24 meses con el headcount estable. El problema no es el esfuerzo. Es lo que la presión sostenida le hace al rendimiento. <span class='intel-src'>Venli / Everstage / SPOTIO 2026</span>",
+    intelAI:       "<b>El 77% de los empleados dice que las herramientas de IA han aumentado su carga de trabajo</b>, a pesar de que el 96% de los directivos esperaba lo contrario. El dividendo de eficiencia no está llegando a la capa humana. <span class='intel-src'>Culture Amp 2026</span>",
+    ctaHead:       "Veámoslo juntos",
+    ctaBody:       "20 minutos. Repasamos dónde está tu equipo bajo más presión, qué le está costando en cumplimiento de cuota y retención, y cuál es el movimiento de mayor impacto para ti este trimestre.",
+    ctaBtn:        "Reservar la llamada",
+    footnote:      "Metodología: coste de sustitución estimado en 1,5× salario con beneficios (SHRM). Pérdida de productividad estimada en el 50% del salario durante tu período de ramp especificado. Costes de gestión estimados en el 10% del salario. El impacto en pipeline usa tus datos de tratos cerrados y tamaño del trato, aplicando el gap de rendimiento proporcionalmente. Productividad durante el ramp modelada al 50%. Precios del programa: 20.000€ para equipos de hasta 10 personas o 2.000€ por persona para un programa de 6 semanas de Pressure Calibration.",
+    currency:      "€",
+    locale:        "es-ES",
+    prog:          "Programa de equipo de 20.000€"
+  }
+};
+
+var lang = "en";
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.querySelectorAll(".lang-btn").forEach(function(b){
+    b.classList.toggle("active", b.textContent === l.toUpperCase());
+  });
+  applyTranslations();
+  updateSignalsSummary();
+  calc();
+}
+
+function applyTranslations() {
+  var t = T[lang];
+  document.querySelectorAll("[data-t]").forEach(function(el){
+    var key = el.getAttribute("data-t");
+    if (t[key] !== undefined) {
+      if (key.indexOf("intel") === 0) {
+        el.innerHTML = t[key];
+      } else {
+        el.textContent = t[key];
+      }
+    }
+  });
+  document.querySelectorAll("[data-ph]").forEach(function(el){
+    var key = el.getAttribute("data-ph");
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  document.getElementById("currency-prefix").textContent = t.currency;
+  document.getElementById("currency-prefix-2").textContent = t.currency;
+}
+
+// ─── CALCULATOR ───────────────────────────────────────────────────────────────
+var PROG_TEAM  = 20000;  // team rate: up to 10 people, 6-week programme
+var PROG_PER   = 2000;   // per-person rate
+
+function fmt(n) {
+  var t = T[lang];
+  if (t.locale === "es-ES") {
+    return t.currency + Math.round(n).toLocaleString("es-ES");
+  }
+  return t.currency + Math.round(n).toLocaleString("en-GB");
+}
+
+var animFrame = null;
+var displayedVal = 0;
+
+function animateTo(target) {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  var start = displayedVal;
+  var startTime = null;
+  var duration = 400;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var ease = 1 - Math.pow(1 - progress, 3);
+    displayedVal = start + (target - start) * ease;
+    document.getElementById("meter-num").textContent = fmt(displayedVal);
+    if (progress < 1) animFrame = requestAnimationFrame(step);
+    else displayedVal = target;
+  }
+  requestAnimationFrame(step);
+}
+
+function calc() {
+  var salary       = parseFloat(document.getElementById("salary").value);
+  var headcount    = parseFloat(document.getElementById("headcount").value);
+  var dealSize     = parseFloat(document.getElementById("deal-size").value);
+  var dealsPerYear = parseFloat(document.getElementById("deals-per-year").value);
+  var rampMonths   = parseFloat(document.getElementById("ramp-months").value);
+  var perfPct      = parseFloat(document.getElementById("perf-slider").value) / 100;
+
+  var meterCard  = document.getElementById("meter-card");
+  var scenarios  = document.getElementById("scenarios");
+  var revCard    = document.getElementById("rev-card");
+  var savingCard = document.getElementById("saving-card");
+  var sigCard    = document.getElementById("signals-card");
+
+  var hasBase    = salary && salary >= 5000 && headcount && headcount >= 1;
+  var hasRevenue = dealSize && dealSize > 0 && dealsPerYear && dealsPerYear > 0;
+  var hasRamp    = rampMonths && rampMonths > 0;
+
+  if (!hasBase) {
+    meterCard.classList.remove("visible");
+    scenarios.classList.remove("visible");
+    revCard.classList.remove("visible");
+    savingCard.classList.remove("visible");
+    sigCard.classList.remove("visible");
+    return;
+  }
+
+  // ── PEOPLE COST ──────────────────────────────────────────────────────────
+  var userRamp = hasRamp ? rampMonths : 7;
+  var replace  = salary * 1.5;
+  var rampCost = salary * (userRamp / 12) * 0.5;  // 50% productivity over user's ramp period
+  var mgmt     = salary * 0.1;
+  var total1   = replace + rampCost + mgmt;
+  var total2   = total1 * 2;
+  var atRisk   = Math.max(1, Math.round(headcount * 0.25));
+  var turnover = atRisk * total1;
+
+  meterCard.classList.add("visible");
+  animateTo(total1);
+  document.getElementById("bk-replace").textContent = fmt(replace);
+  document.getElementById("bk-ramp").textContent    = fmt(rampCost);
+  document.getElementById("bk-mgmt").textContent    = fmt(mgmt);
+  document.getElementById("bk-total").textContent   = fmt(total1);
+
+  scenarios.classList.add("visible");
+  sigCard.classList.add("visible");
+  document.getElementById("sc-two").textContent      = fmt(total2);
+  document.getElementById("sc-risk").textContent     = atRisk + (lang === "es" ? " personas" : " people");
+  document.getElementById("sc-turnover").textContent = fmt(turnover);
+
+  // ── PIPELINE IMPACT ──────────────────────────────────────────────────────
+  if (hasRevenue) {
+    revCard.classList.add("visible");
+
+    // Scenario A: performance gap across team
+    var perfGap        = 1 - perfPct;
+    var dealsLostPerP  = dealsPerYear * perfGap;
+    var revLostPerP    = dealsLostPerP * dealSize;
+    var revLostTeam    = revLostPerP * headcount;
+
+    // Scenario B: vacant seat during ramp
+    var rampM            = hasRamp ? userRamp : 7;
+    var rampFraction     = rampM / 12;
+    var rampDealsMissed  = dealsPerYear * rampFraction * 0.5;  // 50% productivity
+    var rampRevMissed    = rampDealsMissed * dealSize;
+
+    var totalRevAtRisk = revLostTeam + rampRevMissed;
+
+    document.getElementById("rv-deals-year").textContent  = dealsPerYear + (lang === "es" ? " tratos/persona" : " deals/person");
+    document.getElementById("rv-deals-lost").textContent  = dealsLostPerP.toFixed(1) + (lang === "es" ? " tratos/persona" : " deals/person");
+    document.getElementById("rv-rev-lost").textContent    = fmt(revLostTeam);
+    document.getElementById("rv-ramp-delay").textContent  = rampM + (lang === "es" ? " meses al 50%" : " months at 50%");
+    document.getElementById("rv-ramp-deals").textContent  = rampDealsMissed.toFixed(1) + (lang === "es" ? " tratos" : " deals");
+    document.getElementById("rv-ramp-rev").textContent    = fmt(rampRevMissed);
+    document.getElementById("rv-total").textContent       = fmt(totalRevAtRisk);
+
+    // Saving with combined total
+    var roi1       = total1 - PROG_TEAM;
+    var roi2       = total2 - PROG_TEAM;
+    var roiPct     = Math.round((roi1 / PROG_TEAM) * 100);
+    var combined   = total1 + totalRevAtRisk;
+
+    savingCard.classList.add("visible");
+    document.getElementById("sv-team-cost").textContent = fmt(PROG_TEAM);
+    document.getElementById("sv-per-cost").textContent  = fmt(PROG_PER) + (lang === "es" ? " / persona" : " / person");
+    document.getElementById("sv-one").textContent = fmt(roi1);
+    document.getElementById("sv-two").textContent = fmt(roi2);
+    document.getElementById("sv-roi").textContent = roiPct + "×";
+
+    var t = T[lang];
+    var highlight = lang === "en"
+      ? "The <b>" + t.prog + "</b> costs <b>" + fmt(PROG_TEAM) + "</b> for up to 10 people. Preventing one exit saves <b>" + fmt(roi1) + "</b> in people costs. The pipeline impact adds another <b>" + fmt(totalRevAtRisk) + "</b> in revenue at risk. Total exposure: <b>" + fmt(combined) + "</b>."
+      : "El <b>" + t.prog + "</b> cuesta <b>" + fmt(PROG_TEAM) + "</b> para hasta 10 personas. Evitar una salida ahorra <b>" + fmt(roi1) + "</b> en costes de personal. El impacto en pipeline suma otros <b>" + fmt(totalRevAtRisk) + "</b> en ingresos en riesgo. Exposición total: <b>" + fmt(combined) + "</b>.";
+    document.getElementById("saving-highlight").innerHTML = highlight;
+
+  } else {
+    revCard.classList.remove("visible");
+    var roi1   = total1 - PROG_TEAM;
+    var roi2   = total2 - PROG_TEAM;
+    var roiPct = Math.round((roi1 / PROG_TEAM) * 100);
+
+    savingCard.classList.add("visible");
+    document.getElementById("sv-team-cost").textContent = fmt(PROG_TEAM);
+    document.getElementById("sv-per-cost").textContent  = fmt(PROG_PER) + (lang === "es" ? " / persona" : " / person");
+    document.getElementById("sv-one").textContent = fmt(roi1);
+    document.getElementById("sv-two").textContent = fmt(roi2);
+    document.getElementById("sv-roi").textContent = roiPct + "×";
+
+    var t = T[lang];
+    var highlight = lang === "en"
+      ? "The <b>" + t.prog + "</b> costs <b>" + fmt(PROG_TEAM) + "</b> for up to 10 people. If it prevents one exit, the net saving is <b>" + fmt(roi1) + "</b>. Add your deal size and deals per person above to see the full pipeline impact."
+      : "El <b>" + t.prog + "</b> cuesta <b>" + fmt(PROG_TEAM) + "</b> para hasta 10 personas. Si evita una salida, el ahorro neto es de <b>" + fmt(roi1) + "</b>. Introduce el tamaño del trato y los tratos por persona arriba para ver el impacto completo en pipeline.";
+    document.getElementById("saving-highlight").innerHTML = highlight;
+  }
+}
+
+// Slider
+var slider = document.getElementById("perf-slider");
+slider.addEventListener("input", function() {
+  var val = this.value;
+  document.getElementById("perf-pct-display").textContent = val + "%";
+  var pct = ((val - 70) / (98 - 70) * 100).toFixed(1);
+  this.style.setProperty("--pct", pct + "%");
+  calc();
+});
+// Init slider track
+(function(){
+  var val = slider.value;
+  var pct = ((val - 70) / (98 - 70) * 100).toFixed(1);
+  slider.style.setProperty("--pct", pct + "%");
+})();
+
+document.getElementById("salary").addEventListener("input", calc);
+document.getElementById("headcount").addEventListener("input", calc);
+document.getElementById("deal-size").addEventListener("input", calc);
+document.getElementById("deals-per-year").addEventListener("input", calc);
+document.getElementById("ramp-months").addEventListener("input", calc);
+
+// ─── PRESSURE SIGNALS ────────────────────────────────────────────────────────
+var SIGNAL_SUMMARIES = {
+  en: {
+    0: "",
+    1: "You checked <b>1 signal</b>. Worth paying attention to. These symptoms often look isolated but they share one root cause.",
+    2: "You checked <b>2 signals</b>. A pattern is forming. These are not separate problems — they are the same pressure showing up in different places.",
+    3: "You checked <b>3 signals</b>. This is a clear pattern. Your team is carrying more than their output shows, and the pipeline numbers below will reflect it.",
+    4: "You checked <b>4 signals</b>. This is no longer early warning — it is active degradation. The pipeline section below shows you what this costs in closed revenue.",
+    5: "You checked <b>5 signals</b>. Your team is under serious structural pressure. The financial impact below is likely an underestimate.",
+    6: "You checked <b>all 6 signals</b>. Every major pressure indicator is firing. The numbers below represent the minimum cost of inaction."
+  },
+  es: {
+    0: "",
+    1: "Has marcado <b>1 señal</b>. Merece atención. Estos síntomas suelen parecer aislados, pero comparten una misma causa raíz.",
+    2: "Has marcado <b>2 señales</b>. Se está formando un patrón. No son problemas separados — es la misma presión manifestándose en distintos sitios.",
+    3: "Has marcado <b>3 señales</b>. Es un patrón claro. Tu equipo está cargando más de lo que muestran los resultados, y los números de pipeline de abajo lo van a reflejar.",
+    4: "Has marcado <b>4 señales</b>. Esto ya no es una alerta temprana — es degradación activa. La sección de pipeline te muestra lo que te cuesta en ingresos cerrados.",
+    5: "Has marcado <b>5 señales</b>. Tu equipo está bajo presión estructural seria. El impacto financiero de abajo probablemente se queda corto.",
+    6: "Has marcado <b>las 6 señales</b>. Todos los indicadores principales de presión están activos. Los números de abajo representan el coste mínimo de no actuar."
+  }
+};
+
+document.querySelectorAll(".signal-row").forEach(function(row) {
+  row.addEventListener("click", function() {
+    row.classList.toggle("active");
+    updateSignalsSummary();
+  });
+});
+
+function updateSignalsSummary() {
+  var count = document.querySelectorAll(".signal-row.active").length;
+  var summary = document.getElementById("signals-summary");
+  var texts = SIGNAL_SUMMARIES[lang];
+
+  if (count === 0) {
+    summary.classList.remove("visible");
+    summary.className = "signals-summary";
+    return;
+  }
+
+  summary.innerHTML = texts[count];
+  summary.className = "signals-summary visible";
+  if (count <= 2) summary.classList.add("level-low");
+  else if (count <= 4) summary.classList.add("level-mid");
+  else summary.classList.add("level-high");
+}
+
+// Init
+applyTranslations();
+</script>
+</body>
+</html>
