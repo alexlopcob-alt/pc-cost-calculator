@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alex Cobos — CV</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm; }
+
+  :root {
+    --navy: #1F3557;
+    --accent: #C15F3C;
+    --grey: #595959;
+    --light: #F2EEE9;
+    --ink: #1a1a1a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    font-family: "Carlito", "Calibri", "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    font-size: 10.6pt;
+    line-height: 1.42;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---------- Header ---------- */
+  .name {
+    text-align: center;
+    font-size: 26.5pt;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 2.6px;
+    margin: 0 0 2px;
+    line-height: 1.05;
+  }
+  .tagline {
+    text-align: center;
+    font-size: 12.6pt;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 5px;
+  }
+  .contact {
+    text-align: center;
+    font-size: 9.9pt;
+    color: var(--grey);
+    margin: 0 0 12px;
+  }
+  .contact span { white-space: nowrap; }
+  .sep { padding: 0 7px; color: #b9b9b9; }
+
+  /* ---------- Metrics ---------- */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+  .metric {
+    background: var(--light);
+    padding: 9px 4px 10px;
+    text-align: center;
+  }
+  .metric .big {
+    display: block;
+    font-size: 15.5pt;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .metric .small {
+    display: block;
+    font-size: 8.9pt;
+    color: var(--grey);
+    margin-top: 2px;
+  }
+
+  /* ---------- Sections ---------- */
+  h2 {
+    font-size: 11.2pt;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 13px 0 6px;
+    padding-bottom: 2.5px;
+    border-bottom: 1px solid var(--navy);
+  }
+
+  p.summary { margin: 0; text-align: justify; }
+
+  /* ---------- Roles ---------- */
+  .role {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 10px 0 4px;
+    gap: 10px;
+  }
+  .role:first-of-type { margin-top: 5px; }
+  .role .who { flex: 1; }
+  .role .company { font-weight: 700; font-size: 11.3pt; }
+  .role .title { font-style: italic; color: var(--grey); font-size: 10.7pt; }
+  .role .dates {
+    font-weight: 700;
+    font-size: 10pt;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 15px;
+    list-style: none;
+  }
+  li {
+    position: relative;
+    margin-bottom: 3.5px;
+    padding-left: 2px;
+  }
+  li::before {
+    content: "•";
+    position: absolute;
+    left: -11px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  strong { font-weight: 700; }
+
+  /* ---------- Competencies ---------- */
+  .comp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 22px;
+  }
+  .comp li { font-size: 10.3pt; margin-bottom: 3px; }
+
+  /* ---------- Education ---------- */
+  .edu {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .edu .dates { font-weight: 700; font-size: 10pt; color: var(--navy); }
+  .langs { margin: 7px 0 0; }
+
+  /* keep blocks together across the page break */
+  .block { break-inside: avoid; page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+  <div class="name">ALEX COBOS</div>
+  <div class="tagline">Customer Success Manager — Enterprise SaaS &amp; AI Adoption</div>
+  <div class="contact">
+    <span>London, UK</span><span class="sep">|</span><span>alex.lopcob@gmail.com</span><span class="sep">|</span><span>+44 7432 686793</span><span class="sep">|</span><span>linkedin.com/in/alex-cobos</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><span class="big">$11M+</span><span class="small">ARR Portfolio</span></div>
+    <div class="metric"><span class="big">90%+</span><span class="small">Renewal Rate</span></div>
+    <div class="metric"><span class="big">125%</span><span class="small">Net Revenue Retention</span></div>
+    <div class="metric"><span class="big">15+ yrs</span><span class="small">Client-Facing, Full Cycle</span></div>
+  </div>
+
+  <h2>Professional Summary</h2>
+  <p class="summary">
+    Customer Success leader with <strong>15+ years in client-facing roles across the full sales cycle</strong> — from new business development to strategic account management, relationship management, and <strong>C-suite advisory</strong> — built at <strong>US-headquartered SaaS companies (Coursera, Wiley)</strong> serving enterprise customers across EMEA from London. Managed <strong>$11M+ ARR across 30+ strategic accounts</strong> (Volkswagen Group, Novartis, HSBC, BBVA) with 90%+ renewal rates and 125% NRR. <strong>Daily Claude power user</strong> with hands-on command of Anthropic's offering — <strong>Claude, Claude Code, and the API</strong> — building custom AI agents that run my current business's GTM and customer workflows. Genuinely passionate about what Anthropic is building and about helping enterprises turn frontier AI into measurable outcomes, safely.
+  </p>
+
+  <h2>Professional Experience</h2>
+
+  <div class="block">
+    <div class="role">
+      <div class="who"><span class="company">Pressure Calibration™</span> <span class="title">| Co-Founder &amp; Commercial Lead · London</span></div>
+      <div class="dates">Feb 2025 – Present</div>
+    </div>
+    <ul>
+      <li>Built a performance infrastructure business from zero: go-to-market strategy, CS framework, onboarding architecture, and diagnostic playbooks targeting enterprise revenue leaders — foundational build experience directly applicable to an early in-region CS team.</li>
+      <li><strong>Design, build, and run custom AI agents with Claude Code</strong> powering the company's day-to-day operations — prospect research, outreach sequencing, onboarding content, and customer diagnostics — giving me practitioner-level fluency in agentic workflows, prompting techniques, and API-based integration patterns.</li>
+      <li>Created scalable customer-facing playbooks, success-measurement models, and documentation to support independent customer adoption; evaluated and implemented the SaaS tooling stack end-to-end.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <div class="role">
+      <div class="who"><span class="company">Coursera</span> <span class="title">| Senior Customer Success Manager — Strategic Accounts · London</span></div>
+      <div class="dates">May 2021 – Feb 2025</div>
+    </div>
+    <ul>
+      <li><strong>US-headquartered SaaS company:</strong> operated as the EMEA-based owner of strategic accounts, partnering daily across time zones with US-based Product, Engineering, and Sales — the voice of the customer into HQ roadmap prioritisation.</li>
+      <li>Owned <strong>$11M+ ARR across 30 strategic accounts</strong> (Volkswagen Group, Novartis, HSBC, BBVA) as primary strategic advisor to C-suite and VP-level executives.</li>
+      <li>Delivered <strong>90%+ renewal rates and 125% NRR</strong> through proactive risk mitigation, outcome-focused success planning, and rigorous health tracking; prevented six-figure churn events and drove hundreds of thousands in incremental expansion ARR.</li>
+      <li>Led end-to-end onboarding and adoption: monitored usage patterns to surface underutilisation, built adoption roadmaps, and removed barriers through change-management and enablement programmes across complex multi-stakeholder enterprise environments.</li>
+      <li>Ran Executive Business Reviews with Fortune 500 stakeholders, translating platform outcomes into measurable ROI; built a CS measurement framework centred on NRR, gross retention, and health scoring using Gainsight, Tableau, and Power BI.</li>
+      <li>Mentored CSMs, wrote the team's process documentation and playbooks, and supported hiring and onboarding as the function scaled.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <div class="role">
+      <div class="who"><span class="company">Wiley / CrossKnowledge</span> <span class="title">| Global Account Director · London</span></div>
+      <div class="dates">Sept 2017 – May 2021</div>
+    </div>
+    <ul>
+      <li>At US-headquartered Wiley, managed 30+ enterprise SaaS accounts across EMEA and LATAM (HSBC, Barclays, Fortune 500), sustaining 90%+ renewal rates across a multi-million-dollar portfolio.</li>
+      <li>Designed adoption and change-management frameworks serving thousands of end users — train-the-trainer style enablement that cut time-to-adoption and lifted measurable engagement across HR and L&amp;D platforms.</li>
+      <li>Built trusted-advisor relationships with C-level executives; navigated complex organisational silos to find expansion opportunities and exceed revenue targets.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <div class="role">
+      <div class="who"><span class="company">Informa, Euromoney &amp; Financial Times</span> <span class="title">| Enterprise Sales &amp; Account Management</span></div>
+      <div class="dates">2009 – 2017</div>
+    </div>
+    <ul>
+      <li>Progressive B2B roles spanning <strong>the whole sales cycle — new business development through account and relationship management</strong> — across Financial Services, Publishing, and Media.</li>
+      <li>Managed Fortune 500 relationships and complex multi-year deal cycles with a consistent record of revenue growth and customer retention.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>AI &amp; Technical Fluency</h2>
+    <ul>
+      <li><strong>Anthropic offering, hands-on:</strong> daily Claude (Max) power user; build and orchestrate agents with Claude Code; working knowledge of the API, prompting techniques, and AI/ML concepts and how they map to enterprise use cases.</li>
+      <li><strong>Applied agentic AI:</strong> custom agents in production for my own business across research, GTM, and customer success operations — I can credibly demo, teach, and troubleshoot AI workflows with both technical and non-technical stakeholders.</li>
+      <li><strong>Certifications:</strong> Anthropic &amp; DeepLearning.AI — AI/ML Applications (2024); Applied AI Workflows &amp; Automation (2024–2025).</li>
+      <li><strong>Stack:</strong> Gainsight · Salesforce · Tableau · Power BI · SaaS tooling evaluation &amp; implementation.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Core Competencies</h2>
+    <div class="comp">
+      <ul>
+        <li>Full-Lifecycle Ownership: New Business → Onboarding → Adoption → Renewal → Expansion</li>
+        <li>C-Suite &amp; Multi-Level Stakeholder Engagement</li>
+        <li>Consumption- &amp; Seat-Based SaaS Models</li>
+        <li>Executive Business Reviews &amp; Success Planning</li>
+        <li>Usage Monitoring, Health Scoring &amp; Churn Forecasting</li>
+      </ul>
+      <ul>
+        <li>CS Function Design &amp; Foundational / In-Region Build</li>
+        <li>Change Management &amp; Organisational Enablement</li>
+        <li>Adoption Roadmaps &amp; Value Realisation (ROI)</li>
+        <li>Scalable Playbooks &amp; Process Documentation</li>
+        <li>Cross-Functional Collaboration &amp; Voice of Customer</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>Education &amp; Languages</h2>
+    <div class="edu"><div><strong>MBA — London School of Economics</strong></div><div class="dates">2017 – 2018</div></div>
+    <div class="edu"><div><strong>BA Advertising &amp; PR — ESIC Business &amp; Marketing School</strong></div><div class="dates">2004 – 2009</div></div>
+    <p class="langs"><strong>Languages:</strong>&nbsp; English (Native) &nbsp;·&nbsp; Spanish (Native / Bilingual) &nbsp;·&nbsp; Portuguese (Intermediate) &nbsp;·&nbsp; French (Basic)</p>
+  </div>
+
+</body>
+</html>
