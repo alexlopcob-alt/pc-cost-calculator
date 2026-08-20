@@ -190,7 +190,7 @@ const doc = new Document({
           twoCol(
             [compBullet('Full-Lifecycle Ownership: New Business → Onboarding → Adoption → Renewal → Expansion'),
              compBullet('C-Suite & Multi-Level Stakeholder Engagement'),
-             compBullet('Consumption- & Seat-Based SaaS Models'),
+             compBullet('Seat-Based Enterprise Models · Licence Utilisation & Activation'),
              compBullet('Executive Business Reviews & Success Planning'),
              compBullet('Usage Monitoring, Health Scoring & Churn Forecasting')],
             [compBullet('CS Function Design & Foundational / In-Region Build'),
