@@ -1,0 +1,1047 @@
+<title>Racing Thoughts Launch Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root{
+  --paper:#F6F8F7;
+  --surface:#FFFFFF;
+  --surface-2:#EDF1F0;
+  --ink:#12191A;
+  --ink-2:#3D4A4B;
+  --ink-3:#6B7877;
+  --line:#D7DEDC;
+  --line-2:#C2CCCA;
+  --teal:#0F5257;
+  --teal-lift:#14696F;
+  --amber:#B87A00;
+  --amber-bg:#FBF0D8;
+  --slate:#7A8785;
+  --ok:#1F6B44;
+  --warn:#9A4B12;
+  --shadow:0 1px 2px rgba(18,25,26,.06),0 8px 24px -12px rgba(18,25,26,.16);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1314;
+    --surface:#141C1D;
+    --surface-2:#1B2526;
+    --ink:#E8EEEC;
+    --ink-2:#B3C0BE;
+    --ink-3:#8A9896;
+    --line:#263233;
+    --line-2:#334142;
+    --teal:#5FBFC4;
+    --teal-lift:#7BD3D8;
+    --amber:#E5A82E;
+    --amber-bg:#2E2312;
+    --slate:#8A9896;
+    --ok:#5BC08C;
+    --warn:#DB9256;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1314;
+  --surface:#141C1D;
+  --surface-2:#1B2526;
+  --ink:#E8EEEC;
+  --ink-2:#B3C0BE;
+  --ink-3:#8A9896;
+  --line:#263233;
+  --line-2:#334142;
+  --teal:#5FBFC4;
+  --teal-lift:#7BD3D8;
+  --amber:#E5A82E;
+  --amber-bg:#2E2312;
+  --slate:#8A9896;
+  --ok:#5BC08C;
+  --warn:#DB9256;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+@media(max-width:640px){.wrap{padding:0 16px}}
+
+/* ---------- masthead ---------- */
+.mast{
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+  padding:44px 0 34px;
+}
+.eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);margin:0 0 14px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.eyebrow::after{content:"";height:1px;flex:1;min-width:20px;background:var(--line-2)}
+h1{
+  font-size:clamp(30px,5.2vw,50px);
+  font-weight:700;letter-spacing:-.024em;line-height:1.04;
+  margin:0 0 14px;text-wrap:balance;
+  font-stretch:112%;
+}
+.dek{
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:17px;line-height:1.55;color:var(--ink-2);
+  max-width:60ch;margin:0 0 26px;
+}
+.facts{
+  display:flex;flex-wrap:wrap;gap:0;
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.fact{
+  flex:1 1 150px;padding:12px 16px;
+  border-right:1px solid var(--line);
+  background:var(--surface);
+}
+.fact:last-child{border-right:none}
+.fact dt{
+  font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 3px;
+}
+.fact dd{
+  margin:0;font-size:15px;font-weight:600;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:40;
+  background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.navrow{display:flex;gap:2px;overflow-x:auto;padding:0;scrollbar-width:thin}
+nav a{
+  flex:0 0 auto;padding:13px 14px;
+  font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-3);text-decoration:none;
+  border-bottom:2px solid transparent;white-space:nowrap;
+}
+nav a:hover{color:var(--ink);border-bottom-color:var(--line-2)}
+nav a:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+
+/* ---------- sections ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:28px}
+.sec-num{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.08em;
+  display:block;margin-bottom:8px;
+}
+h2{
+  font-size:clamp(22px,3.4vw,30px);font-weight:700;letter-spacing:-.018em;
+  margin:0 0 10px;line-height:1.12;text-wrap:balance;font-stretch:108%;
+}
+.sec-sub{
+  font-family:"Source Serif 4",Georgia,serif;
+  color:var(--ink-2);max-width:68ch;margin:0;font-size:16px;
+}
+h3{font-size:17px;font-weight:600;letter-spacing:-.008em;margin:0 0 8px}
+
+/* ---------- callouts ---------- */
+.note{
+  border-left:3px solid var(--amber);
+  background:var(--amber-bg);
+  padding:14px 18px;border-radius:0 3px 3px 0;
+  margin:22px 0;font-size:14px;color:var(--ink);
+}
+.note strong{font-weight:600}
+.note-teal{border-left-color:var(--teal);background:var(--surface-2)}
+
+/* ---------- actions ---------- */
+.actions{display:flex;flex-direction:column;gap:0;counter-reset:act;
+  border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--surface)}
+.act{
+  display:grid;grid-template-columns:52px 1fr 132px;gap:16px;
+  padding:16px 18px;border-bottom:1px solid var(--line);align-items:start;
+}
+.act:last-child{border-bottom:none}
+.act-n{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+  color:var(--surface);background:var(--teal);
+  width:30px;height:30px;border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-variant-numeric:tabular-nums;
+}
+.act-b h4{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:-.005em}
+.act-b p{margin:0;font-size:14px;color:var(--ink-2);font-family:"Source Serif 4",Georgia,serif}
+.act-when{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);
+  text-align:right;letter-spacing:.02em;padding-top:6px;
+}
+@media(max-width:720px){
+  .act{grid-template-columns:40px 1fr;gap:12px}
+  .act-when{grid-column:2;text-align:left;padding-top:6px}
+}
+
+/* ---------- table ---------- */
+.tablewrap{
+  overflow-x:auto;border:1px solid var(--line);border-radius:3px;
+  background:var(--surface);
+}
+table{border-collapse:collapse;width:100%;min-width:1500px;font-size:13px}
+thead th{
+  position:sticky;top:0;z-index:2;
+  background:var(--surface-2);
+  text-align:left;padding:10px 12px;
+  font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-2);border-bottom:1px solid var(--line-2);white-space:nowrap;
+}
+tbody td{
+  padding:11px 12px;border-bottom:1px solid var(--line);
+  vertical-align:top;color:var(--ink-2);
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--surface-2)}
+td.co{font-weight:600;color:var(--ink);min-width:158px}
+td.why,td.prop{min-width:230px;font-family:"Source Serif 4",Georgia,serif;font-size:13.5px}
+td.mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:-.01em}
+td.src{font-size:11.5px;color:var(--ink-3);min-width:120px}
+td.next{min-width:180px;font-size:12.5px}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--teal) 30%,transparent)}
+a:hover{border-bottom-color:var(--teal)}
+a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+.pri{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:2px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+}
+.pri-A{background:var(--amber);color:#fff}
+.pri-B{background:var(--teal);color:#fff}
+.pri-C{background:var(--slate);color:#fff}
+:root[data-theme="dark"] .pri-A,:root[data-theme="dark"] .pri-B,:root[data-theme="dark"] .pri-C{color:#0D1314}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .pri-A,
+  :root:not([data-theme="light"]) .pri-B,
+  :root:not([data-theme="light"]) .pri-C{color:#0D1314}
+}
+
+.tag{
+  display:inline-block;padding:1px 6px;border-radius:2px;
+  font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--line-2);color:var(--ink-3);white-space:nowrap;
+}
+.tag-v{border-color:color-mix(in srgb,var(--ok) 40%,transparent);color:var(--ok)}
+.tag-n{border-color:color-mix(in srgb,var(--warn) 40%,transparent);color:var(--warn)}
+
+/* ---------- email cards ---------- */
+.mailgrid{display:flex;flex-direction:column;gap:18px}
+.mail{
+  border:1px solid var(--line);border-radius:3px;background:var(--surface);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.mail-h{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:13px 18px;background:var(--surface-2);
+  border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.mail-h h3{margin:0;font-size:15px}
+.mail-to{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);
+  margin-top:3px;
+}
+.copy{
+  font-family:"Archivo",sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;
+  background:transparent;color:var(--teal);
+  border:1px solid var(--line-2);border-radius:2px;
+  padding:6px 11px;cursor:pointer;white-space:nowrap;
+}
+.copy:hover{background:var(--teal);color:var(--surface);border-color:var(--teal)}
+:root[data-theme="dark"] .copy:hover{color:#0D1314}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .copy:hover{color:#0D1314}}
+.copy:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.mail-b{
+  padding:18px;font-family:"Source Serif 4",Georgia,serif;
+  font-size:14.5px;line-height:1.62;white-space:pre-wrap;color:var(--ink-2);
+  max-width:74ch;
+}
+.mail-b .subj{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  color:var(--ink);display:block;margin-bottom:14px;
+  padding-bottom:12px;border-bottom:1px solid var(--line);
+}
+.hook{
+  background:color-mix(in srgb,var(--teal) 9%,transparent);
+  padding:1px 3px;border-radius:2px;
+}
+
+/* ---------- creators ---------- */
+.crgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px}
+.cr{
+  border:1px solid var(--line);border-radius:3px;padding:15px 16px;
+  background:var(--surface);
+}
+.cr-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:3px}
+.cr h4{margin:0;font-size:14.5px;font-weight:600}
+.cr .handle{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--teal);display:block;margin-bottom:9px}
+.cr .foll{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+.cr dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 9px;font-size:12.5px}
+.cr dt{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.cr dd{margin:0;color:var(--ink-2)}
+
+/* ---------- channels ---------- */
+.ch{
+  border:1px solid var(--line);border-left:3px solid var(--teal);
+  border-radius:0 3px 3px 0;background:var(--surface);
+  padding:20px 22px;margin-bottom:16px;
+}
+.ch-h{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.ch h3{margin:0;font-size:18px;letter-spacing:-.012em}
+.ch-rank{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  color:var(--surface);background:var(--teal);padding:3px 9px;border-radius:2px;
+}
+:root[data-theme="dark"] .ch-rank{color:#0D1314}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ch-rank{color:#0D1314}}
+.ch p{font-family:"Source Serif 4",Georgia,serif;color:var(--ink-2);margin:0 0 10px;max-width:72ch}
+.ch-math{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;
+  background:var(--surface-2);padding:9px 13px;border-radius:2px;
+  color:var(--ink);display:inline-block;font-variant-numeric:tabular-nums;
+}
+
+ul.tight{margin:10px 0 0;padding-left:20px;font-family:"Source Serif 4",Georgia,serif;color:var(--ink-2)}
+ul.tight li{margin-bottom:5px}
+
+footer{padding:40px 0 56px;color:var(--ink-3);font-size:13px}
+footer p{max-width:72ch;margin:0 0 9px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Partnerships &amp; Event Growth · Madrid Race Week</p>
+    <h1>Racing Thoughts Launch Desk</h1>
+    <p class="dek">Verified partner and prospect research for <strong>The Pre-Race Nervous System Experience</strong> — Friday 11 September 2026, 09:00–10:30, Madrid. Every contact below carries a public source. Nothing is pattern-guessed.</p>
+    <dl class="facts">
+      <div class="fact"><dt>Race weekend</dt><dd>11–13 Sept 2026</dd></div>
+      <div class="fact"><dt>Our slot</dt><dd>Fri · Practice day</dd></div>
+      <div class="fact"><dt>Seats to fill</dt><dd>30</dd></div>
+      <div class="fact"><dt>Prospects listed</dt><dd>52</dd></div>
+      <div class="fact"><dt>Direct emails verified</dt><dd>31</dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap"><div class="navrow">
+    <a href="#reality">Reality check</a>
+    <a href="#actions">10 actions</a>
+    <a href="#crm">CRM table</a>
+    <a href="#venue-mail">Venue emails</a>
+    <a href="#comm-mail">Community emails</a>
+    <a href="#creators">Creators</a>
+    <a href="#channels">5 channels</a>
+    <a href="#gaps">What I couldn't verify</a>
+  </div></div>
+</nav>
+
+<section id="reality">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">00 / GROUND TRUTH</span>
+      <h2>Four findings that should change the plan</h2>
+      <p class="sec-sub">I'd rather front-load these than bury them under a contact list. Each one is load-bearing for how you spend the next 11 days.</p>
+    </div>
+
+    <div class="note">
+      <strong>1. The date is right, and that's genuinely lucky.</strong> The Spanish GP runs 11–13 September 2026 at MADRING (IFEMA). Friday 11 September is <em>practice day</em> — first track action is late morning/afternoon. A 09:00–10:30 slot sits in real dead time for ticket-holders, and doesn't compete with the race itself. Verified: <a href="https://www.madring.com/en/press-releases/spanish-gp-calendar">madring.com</a>.
+    </div>
+
+    <div class="note note-teal">
+      <strong>2. Your economics can't fund a hotel sales cycle.</strong> 30 seats at €89–129 is roughly <strong>€2,700–3,900 gross</strong>. Hotel MICE teams quote on 3–6 month lead times and rank inbound by F&amp;B spend. A €3k event with 11 days' notice will not clear their internal priority filter, and chasing it burns the days you need for selling. Treat venue partnership as a <em>parallel</em> track with a hard stop, not the critical path.
+    </div>
+
+    <div class="note note-teal">
+      <strong>3. Your buyer is a Madrid resident, not an F1 tourist.</strong> Official F1 Experiences hospitality for the 2026 Spanish GP is already <a href="https://f1experiences.com/2026-spanish-grand-prix">sold out</a> — so high-spend visitors exist, but they arrive on fixed, pre-paid itineraries and are jet-lagged on Friday morning. The realistic 09:00 Friday buyer is a Madrid-based high earner who wants the race-week charge without a grandstand seat. Sell to Salamanca and Chamberí first; sell to visitors second.
+    </div>
+
+    <div class="note">
+      <strong>4. Your actual leverage with venues is dead inventory.</strong> Madrid hotel rooftops don't open to the public until roughly midday. At 09:00 on a Friday, a rooftop generates precisely zero revenue. That is a far stronger opening than "partnership" as an abstraction — you are asking to activate a space during hours it currently earns nothing, on the single highest-visibility weekend of the city's year. Lead every venue email with that.
+    </div>
+
+    <div class="note">
+      <strong>Operational filter — apply before you fall in love with a rooftop.</strong> 30 people lying on mats needs roughly <strong>60–75 m² of clear, flat, level floor</strong> (0.6 × 1.8 m per mat plus circulation and a facilitator lane). Pool decks, fixed Balinese beds, planters and split levels kill capacity fast. Ask every venue for <em>clear floor area</em>, not total area.
+    </div>
+  </div>
+</section>
+
+<section id="actions">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01 / TOMORROW</span>
+      <h2>Top 10 actions to take tomorrow</h2>
+      <p class="sec-sub">Ordered by what unblocks the most downstream work. Items 1–4 are before lunch; they gate everything else.</p>
+    </div>
+    <div class="actions">
+      <div class="act"><div class="act-n">1</div><div class="act-b"><h4>Put the ticket link live before you send a single email</h4><p>Every partner email below asks someone to share something. If there's nothing to share, the warm reply dies on the vine. A simple checkout page with the three price tiers and a member-code field is enough — polish it later.</p></div><div class="act-when">08:30 · 45 min</div></div>
+
+      <div class="act"><div class="act-n">2</div><div class="act-b"><h4>Send all 10 community emails first — before the venue emails</h4><p>Studios and clubs are the ones who actually fill seats, they answer within a day, and they need no contract. Venue emails are slower and lower-yield. Reverse the intuitive order.</p></div><div class="act-when">09:15 · 60 min</div></div>
+
+      <div class="act"><div class="act-n">3</div><div class="act-b"><h4>Confirm the facilitator's name spelling for all public material</h4><p>Public sources for a breathwork facilitator with this profile show <strong>Elina Kadaja</strong> (<a href="https://elinasufia.com/en/">elinasufia.com</a>, <a href="https://www.instagram.com/elinasufia_breathwork/">@elinasufia_breathwork</a>), not "Elena". If that's your facilitator, fix it everywhere before anything is printed or sent — a misspelled lead name on a premium event is an avoidable credibility cost.</p></div><div class="act-when">09:00 · 10 min</div></div>
+
+      <div class="act"><div class="act-n">4</div><div class="act-b"><h4>Call — don't email — BLESS, Only YOU and Círculo de Bellas Artes</h4><p>These three have direct, published, human-answered numbers and rooftop or terrace inventory idle at 09:00. Only YOU publicly states it opens for celebrations from 09:00, and Círculo has a dedicated external-events desk. A phone call on day one beats an email thread on day five.</p></div><div class="act-when">10:30 · 45 min</div></div>
+
+      <div class="act"><div class="act-n">5</div><div class="act-b"><h4>Get a written quote for 30 wireless headsets</h4><p>The headsets are the difference between "breathwork class" and "immersive experience" in your positioning — but they're also the one cost that can quietly break a €3k event. Get a real Madrid silent-disco rental quote for 30 units + transmitter + technician before you promise them in any partner email.</p></div><div class="act-when">11:30 · 30 min</div></div>
+
+      <div class="act"><div class="act-n">6</div><div class="act-b"><h4>Offer Corazón Studio and ARO an exclusive founding-partner slot</h4><p>Both are Salamanca-district premium studios with exactly your buyer and published direct emails. Offer one of them genuine exclusivity in their category in exchange for a dedicated member mail-out — exclusivity is free for you and is the thing that makes a studio actually press send.</p></div><div class="act-when">12:15 · 30 min</div></div>
+
+      <div class="act"><div class="act-n">7</div><div class="act-b"><h4>Send the 10 venue emails as a timed batch</h4><p>All ten at once, same afternoon. Parallel, not sequential — you cannot afford to wait for BLESS before writing to EDITION. Track replies in the Status column of the CRM.</p></div><div class="act-when">14:00 · 90 min</div></div>
+
+      <div class="act"><div class="act-n">8</div><div class="act-b"><h4>DM the two F1 creators with verified business emails</h4><p><a href="https://www.instagram.com/delbosquef1/">@delbosquef1</a> and <a href="https://www.instagram.com/maniaonboard/">@maniaonboard</a> are the only two creators in this research whose contact addresses are publicly published. Everyone else needs manual bio verification — do that yourself, in-app, tomorrow.</p></div><div class="act-when">16:00 · 30 min</div></div>
+
+      <div class="act"><div class="act-n">9</div><div class="act-b"><h4>Write to Club Financiero Génova's events desk about their own rooftop</h4><p>They have a published events address (<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">eventos@espaciocfg.com</span>), a documented azotea, and a membership of exactly your target profile. It is the rare prospect that is venue <em>and</em> audience in one — which makes it the single highest-value conversation on this list.</p></div><div class="act-when">16:30 · 20 min</div></div>
+
+      <div class="act"><div class="act-n">10</div><div class="act-b"><h4>Set a venue decision deadline of Friday 4 September</h4><p>Seven days out, you take whatever is confirmed and start marketing hard against a named location. A named venue converts materially better than "central Madrid, location revealed on booking". Put the date in the calendar now, before optimism erodes it.</p></div><div class="act-when">17:00 · 5 min</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="crm">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02 / PIPELINE</span>
+      <h2>CRM table — 52 prospects</h2>
+      <p class="sec-sub">Scroll horizontally for all fifteen columns. <span class="tag tag-v">Verified</span> means the address or number appears in a public source, linked in the Source column. <span class="tag tag-n">Not verified</span> means I found the organisation and the role but no publicly published address — I have deliberately left those blank rather than guessing a format.</p>
+    </div>
+
+    <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th>Pri</th><th>Company</th><th>Category</th><th>Contact</th><th>Title</th><th>Email</th><th>Phone</th><th>LinkedIn</th><th>Instagram</th><th>Website</th><th>Why fit</th><th>Proposed partnership</th><th>Source</th><th>Status</th><th>Next action</th>
+      </tr></thead>
+      <tbody>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">BLESS Hotel Madrid — Picos Pardos Sky Lounge</td><td>A · Hotel</td><td>Pedro Echevarría <span class="tag tag-n">no direct</span></td><td>General Manager</td><td class="mono">mice.madrid@<wbr>blesscollectionhotels.com<br>picospardos@<wbr>blesscollectionhotels.com</td><td class="mono">+34 616 49 22 46<br>+34 910 86 13 86</td><td class="mono">/company/<wbr>blesscollectionhotels</td><td class="mono">—</td><td class="mono">blesscollectionhotels.com</td><td class="why">Salamanca rooftop with pool, Balinese beds and Velázquez views. Guest profile is exactly the target. Rooftop earns nothing at 09:00.</td><td class="prop">Venue partner. We produce and facilitate; they provide the sky lounge pre-opening and offer priority guest access.</td><td class="src"><a href="https://www.palladiumhotelgroup.com/en/hotels/espana/madrid/bless-hotel-madrid/weddings-groups">Palladium MICE page</a></td><td>Not started</td><td class="next">Phone MICE line, then email</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">The Madrid EDITION — Oroya &amp; The Roof</td><td>A · Hotel</td><td>—</td><td>Events / Groups</td><td class="mono">oroya.madrid@<wbr>editionhotels.com</td><td class="mono">+34 919 54 54 50</td><td class="mono">/company/editionhotels</td><td class="mono">@editionhotels</td><td class="mono">editionhotels.com/madrid</td><td class="why">Oroya is 145 m² with 75 cocktail capacity — right-sized. EDITION as a brand already programmes wellness and culture.</td><td class="prop">Venue partner + co-branded race-week wellness slot in their F&amp;B programming.</td><td class="src"><a href="https://www.editionhotels.com/madrid/meetings-and-events/oroya/">EDITION Oroya events</a></td><td>Not started</td><td class="next">Email; ask clear floor m²</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Círculo de Bellas Artes — Azotea</td><td>A · Cultural venue</td><td>—</td><td>External Events</td><td class="mono">eventosexternos@<wbr>circulobellasartes.com<br>azoteadelcirculo.eventos@<wbr>azoteagrupo.com</td><td class="mono">91 266 04 23<br>91 117 00 62</td><td class="mono">—</td><td class="mono">@azoteadelcirculo</td><td class="mono">circulobellasartes.com</td><td class="why">Rooftop at 56 m with 300 capacity and a genuine external-rental desk. Cultural institution framing suits "neuroscience + performance" better than a hotel bar.</td><td class="prop">Straight venue partnership or low-cost morning rental; culture-programme co-billing.</td><td class="src"><a href="https://madridfilmoffice.com/en/location/circulo-de-bellas-artes/">Madrid Film Office</a></td><td>Not started</td><td class="next">Call external events desk</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Only YOU Boutique Hotel Madrid</td><td>A · Hotel</td><td>—</td><td>Events</td><td class="mono">madrid@<wbr>onlyyouhotels.com</td><td class="mono">+34 910 05 22 22</td><td class="mono">/company/<wbr>onlyyouhotels</td><td class="mono">@onlyyouboutiquehotel</td><td class="mono">onlyyouhotels.com</td><td class="why">Publicly states spaces open from 09:00 for celebrations — the only property found that already operates at our exact hour. Chueca/Justicia location.</td><td class="prop">Venue partner; morning activation of an already-staffed 09:00 space.</td><td class="src"><a href="https://www.onlyyouhotels.com/en/hotels/only-you-boutique-hotel-madrid/meetings-events/">Only YOU M&amp;E</a></td><td>Not started</td><td class="next">Call — cite their 09:00 opening</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Club Financiero Génova</td><td>B · Members club</td><td>—</td><td>Events / Member relations</td><td class="mono">eventos@espaciocfg.com<br>socios@<wbr>clubfinancierogenova.com<br>info@<wbr>clubfinancierogenova.com</td><td class="mono">91 310 49 00<br>+34 91 737 71 10</td><td class="mono">—</td><td class="mono">—</td><td class="mono">clubfinancierogenova.com</td><td class="why">Venue <em>and</em> audience in one: azotea over Plaza de Colón, event rooms to 200, and a membership of Madrid finance executives. Founded 1973, Salamanca golden mile.</td><td class="prop">Venue + member distribution. Complimentary places for the board; member rate for the rest.</td><td class="src"><a href="https://www.clubfinancierogenova.com/contacto-club-financiero-genova/">CFG contact page</a></td><td>Not started</td><td class="next">Email events desk + socios</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Corazón Studio</td><td>C · Wellness</td><td>—</td><td>Studio / Founder</td><td class="mono">hello@corazon-studio.com</td><td class="mono">+34 620 01 14 19</td><td class="mono">—</td><td class="mono">@corazon__studio</td><td class="mono">corazon-studio.com</td><td class="why">Boutique heated yoga/Pilates in Barrio Salamanca. Members already pay premium per-class rates — a €89 ticket is a small step, not a leap.</td><td class="prop">Community partner: member code + one dedicated mail-out. Offer category exclusivity.</td><td class="src"><a href="https://corazon-studio.com/contact-us/">Studio contact page</a></td><td>Not started</td><td class="next">Email founding-partner offer</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">ARO Madrid</td><td>C · Wellness</td><td>—</td><td>Studio / Founder</td><td class="mono">hello@movewitharo.com</td><td class="mono">—</td><td class="mono">—</td><td class="mono">@movewitharo</td><td class="mono">movewitharo.com</td><td class="why">Already runs breathwork, sound, contrast therapy and conscious-movement recovery. The closest philosophical match in Madrid — their members need no education on the concept.</td><td class="prop">Community partner + possible co-facilitation or warm-up session.</td><td class="src"><a href="https://movewitharo.com/">movewitharo.com</a></td><td>Not started</td><td class="next">Email; propose co-billing</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Revive Wellness Hub</td><td>C · Wellness</td><td>—</td><td>Front desk / Owner</td><td class="mono"><span class="tag tag-n">form only</span></td><td class="mono">+34 605 35 72 92 (Justicia)<br>+34 654 87 30 78 (Salamanca)</td><td class="mono">—</td><td class="mono">@revive_spain</td><td class="mono">revivespain.com</td><td class="why">Two sites (Bárbara de Braganza 10; María de Molina 28) with sauna, ice bath, HYROX. Performance-recovery audience with high disposable income.</td><td class="prop">Community partner; cross-promo with their recovery members. WhatsApp is their stated fast channel.</td><td class="src"><a href="https://revivespain.com/contact/">Revive contact</a></td><td>Not started</td><td class="next">WhatsApp Salamanca site</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Club Matador</td><td>B · Members club</td><td>—</td><td>Club / Membership</td><td class="mono">info@clubmatador.com</td><td class="mono">910 609 883</td><td class="mono">/company/club-matador</td><td class="mono">—</td><td class="mono">clubmatador.com</td><td class="why">Founded 2013 by the Matador magazine team; Jorge Juan 5, Salamanca. Culture-forward membership that buys ideas, not gym classes.</td><td class="prop">Community partner; member-only allocation + complimentary places for club leadership.</td><td class="src"><a href="https://www.iberinform.es/empresa/6260870/club-matador">Iberinform registry</a></td><td>Not started</td><td class="next">Email membership desk</td></tr>
+
+<tr><td><span class="pri pri-A">A</span></td><td class="co">Impact Hub Madrid</td><td>G · Founders</td><td>—</td><td>Community</td><td class="mono">madrid@impacthub.net</td><td class="mono">911 924 854</td><td class="mono">/company/impact-hub-madrid</td><td class="mono">@impacthubmadrid</td><td class="mono">madrid.impacthub.net</td><td class="why">~800-professional member community across four Madrid sites, with an established internal events channel. B Corp; founder-heavy.</td><td class="prop">Community partner: newsletter slot + member code. Revenue share if they prefer.</td><td class="src"><a href="https://www.madridemprende.es/entidades_colab/impact-hub-madrid/">Madrid Emprende</a></td><td>Not started</td><td class="next">Email community manager</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Rosewood Villa Magna</td><td>A · Hotel</td><td>María Alastuey Blanes <span class="tag tag-n">no direct</span></td><td>Event Manager</td><td class="mono">villamagna.reservations@<wbr>rosewoodhotels.com</td><td class="mono">+34 91 587 1234</td><td class="mono">/company/<wbr>rosewood-villa-magna</td><td class="mono">@rosewoodvillamagna</td><td class="mono">rosewoodhotels.com/<wbr>en/villa-magna</td><td class="why">Castellana 22, Salamanca. Events from 10 to 500; 477 m² ballroom. Rosewood's global wellness positioning fits the concept language.</td><td class="prop">Venue partner; indoor salon fallback if rooftop options fail.</td><td class="src"><a href="https://www.rosewoodhotels.com/en/villa-magna/meetings-and-events">Rosewood M&amp;E</a></td><td>Not started</td><td class="next">Email; ask for events team</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Thompson Madrid (Hyatt) — Makáá rooftop</td><td>A · Hotel</td><td>—</td><td>RFP / Events</td><td class="mono">madrp.rfp@<wbr>thompsonhotels.com</td><td class="mono">—</td><td class="mono">/company/thompsonhotels</td><td class="mono">@thompsonmadrid</td><td class="mono">hyatt.com/thompson-hotels</td><td class="why">600+ m² indoor and outdoor event space, rooftop with 360° skyline and infinity pool, Plaza del Carmen. Design-led brand that likes cultural programming.</td><td class="prop">Venue partner; rooftop pre-service activation.</td><td class="src"><a href="https://www.hyatt.com/thompson-hotels/en-US/madrp-thompson-madrid">Hyatt property site</a></td><td>Not started</td><td class="next">Email RFP address</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Hyatt Centric Gran Vía — El Jardín de Diana</td><td>A · Hotel</td><td>Marta Casas <span class="tag tag-n">no direct</span></td><td>Events contact</td><td class="mono"><span class="tag tag-n">via hotel site</span></td><td class="mono">—</td><td class="mono">/company/hyatt</td><td class="mono">@hyattcentricgranvia</td><td class="mono">hyattcentric<wbr>granviamadrid.com</td><td class="why">270 m² across indoor and outdoor on the 10th floor of an art-deco tower, with a dedicated events department. Genuinely right-sized for 30 mats.</td><td class="prop">Venue partner; morning terrace activation before service.</td><td class="src"><a href="https://www.esmadrid.com/mcb/en/venue-service/hyatt-centric-gran-via-madrid/">Madrid Convention Bureau</a></td><td>Not started</td><td class="next">Call hotel, ask for Marta Casas</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">VP Plaza España Design — Ginkgo Sky Bar</td><td>A · Hotel</td><td>—</td><td>Commercial / Sky Bar</td><td class="mono">comercialplaza@<wbr>vphoteles.com<br>ginkgo@vphoteles.com</td><td class="mono">+34 915 95 55 10<br>+34 91 595 55 12</td><td class="mono">/company/vp-hoteles</td><td class="mono">@ginkgoskybar</td><td class="mono">plazaespana-hotel.com</td><td class="why">12th-floor terrace with near-360° views, covered and uncovered zones, and direct street access — guests reach it without crossing the hotel, which simplifies a 09:00 arrival.</td><td class="prop">Venue partner; morning use of Ginkgo before lunch service.</td><td class="src"><a href="https://www.plazaespana-hotel.com/en/gastronomy/sky-bar-rooftop-madrid/">VP official site</a></td><td>Not started</td><td class="next">Email comercial + ginkgo</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Wellington Hotel &amp; Spa Madrid</td><td>A · Hotel</td><td>—</td><td>Events</td><td class="mono">info@hotel-wellington.com</td><td class="mono">—</td><td class="mono">/company/<wbr>hotel-wellington-madrid</td><td class="mono">@wellingtonhotelmadrid</td><td class="mono">hotel-wellington.com</td><td class="why">Velázquez 8; 13 naturally-lit salons to 300, rooftop pool open in summer season (11 Sept still qualifies), plus Le Max Wellness Club — they already sell wellness.</td><td class="prop">Venue partner via the existing spa/wellness club rather than the MICE desk.</td><td class="src"><a href="https://www.hotel-wellington.com/en/events/">Wellington events</a></td><td>Not started</td><td class="next">Email; route to spa director</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Four Seasons Hotel Madrid</td><td>A · Hotel</td><td>Sara Herrero <span class="tag tag-n">no direct</span></td><td>Director of Catering Sales</td><td class="mono"><span class="tag tag-n">web form only</span></td><td class="mono">+34 910 883 333 (events)<br>+34 910 880 188</td><td class="mono">/company/four-seasons</td><td class="mono">@fsmadrid</td><td class="mono">fourseasons.com/madrid</td><td class="why">Centro Canalejas rooftop is among the most photographed in Madrid. Highest brand-halo option — and the hardest to win at this budget.</td><td class="prop">Venue partner; content-led, positioned around their rooftop's visibility.</td><td class="src"><a href="https://www.fourseasons.com/madrid/meetings-and-events/">FS meetings page</a></td><td>Not started</td><td class="next">Call events line, ask for Sara Herrero</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Mandarin Oriental Ritz, Madrid</td><td>A · Hotel</td><td>—</td><td>Events / Wellness</td><td class="mono">mrmad-info@mohg.com</td><td class="mono">+34 91 701 68 88</td><td class="mono">/company/<wbr>mandarin-oriental</td><td class="mono">@mo_madrid</td><td class="mono">mandarinoriental.com/<wbr>madrid</td><td class="why">Plaza de la Lealtad; capacity to 400 cocktail. Strong existing spa and wellness proposition to attach to.</td><td class="prop">Venue partner routed through wellness, not banqueting.</td><td class="src"><a href="https://www.mandarinoriental.com/en/madrid/hotel-ritz/contact-us">MO contact page</a></td><td>Not started</td><td class="next">Email, flag spa/wellness</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">GONG Club de Yoga</td><td>C · Wellness</td><td>—</td><td>Reception / Club</td><td class="mono">recepcion@elgong.es</td><td class="mono">911 99 29 54<br>WhatsApp 638 555 597</td><td class="mono">—</td><td class="mono">@gong.club</td><td class="mono">gong.yoga</td><td class="why">Chamberí wellness club with yoga, Pilates, barre, therapy rooms — and they already run functional-breathing workshops, so the concept needs no translation.</td><td class="prop">Community partner + possible warm-up workshop in the run-up.</td><td class="src"><a href="https://gong.yoga/contacto/">GONG contact</a></td><td>Not started</td><td class="next">WhatsApp + email</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">MAD Members Club</td><td>B · Members club</td><td>—</td><td>Partnerships</td><td class="mono"><span class="tag tag-n">app / site only</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@madmembersclub</td><td class="mono">madmembersclub.com</td><td class="why">Premium nightlife/lifestyle membership running curated "MAD Experiences" for members — a morning experience is genuinely additive to a nightlife-weighted calendar.</td><td class="prop">Community partner: slot Racing Thoughts into MAD Experiences with member allocation.</td><td class="src"><a href="https://www.madmembersclub.com/">madmembersclub.com</a></td><td>Not started</td><td class="next">Instagram DM + site form</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Victoria Studio (Almagro / Salamanca)</td><td>C · Wellness</td><td>—</td><td>Studio</td><td class="mono"><span class="tag tag-n">not published</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@victoriastudiomadrid</td><td class="mono">victoriastudio.es</td><td class="why">Two boutique sites (Almagro 23 + Salamanca) doing Reformer, yoga and barre for exactly the target demographic.</td><td class="prop">Community partner; member code.</td><td class="src"><a href="https://victoriastudio.es/">victoriastudio.es</a></td><td>Not started</td><td class="next">DM Instagram for events contact</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">EO Madrid — Entrepreneurs' Organization</td><td>G · Executives</td><td>—</td><td>Chapter board</td><td class="mono"><span class="tag tag-n">chapter form</span></td><td class="mono">—</td><td class="mono">/company/<wbr>entrepreneurs-organization</td><td class="mono">@eomadrid</td><td class="mono">member.eonetwork.org/<wbr>madrid</td><td class="why">Peer network of business owners — the exact "high earner under pressure" profile, pre-assembled and used to paying for experiences.</td><td class="prop">Community partner; chapter-exclusive allocation, complimentary places for board members.</td><td class="src"><a href="https://member.eonetwork.org/madrid/contact-our-chapter">EO Madrid chapter contact</a></td><td>Not started</td><td class="next">Submit chapter form + IG DM</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Madrid Concierge</td><td>E · Concierge</td><td>—</td><td>Concierge team</td><td class="mono">info@madridconcierge.com</td><td class="mono">—</td><td class="mono">—</td><td class="mono">@madridconciergeservices</td><td class="mono">madridconcierge.com</td><td class="why">Sells luxury experiences, VIP transfers and event access to exactly the visitor cohort arriving for the GP.</td><td class="prop">Affiliate/commission on referred bookings; add to their race-week menu.</td><td class="src"><a href="https://madridconcierge.com/">madridconcierge.com</a></td><td>Not started</td><td class="next">Email with commission terms</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Soho House — Madrid (Cities Without Houses)</td><td>B · Members club</td><td>—</td><td>Membership</td><td class="mono">membership@sohohouse.com</td><td class="mono">—</td><td class="mono">/company/soho-house</td><td class="mono">@sohohouse</td><td class="mono">sohohouse.com</td><td class="why">Madrid appears as a Cities Without Houses membership city — a resident member base with no physical house, so off-site experiences are the whole proposition.</td><td class="prop">Community partner; CWH member allocation.</td><td class="src"><a href="https://www.sohohouse.com/en-us/membership/cities-without-houses">Soho House CWH</a></td><td>Not started</td><td class="next">Email membership; ask for Madrid CWH lead</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">O2 Centro Wellness</td><td>C · Wellness</td><td>—</td><td>Club management</td><td class="mono">plenilunio@o2cw.es <span class="tag tag-n">branch</span></td><td class="mono">91 444 97 60 (Manuel Becerra)</td><td class="mono">/company/<wbr>o2-centro-wellness</td><td class="mono">@o2centrowellness</td><td class="mono">o2cw.es</td><td class="why">Premium chain with gym, pool and spa; Manuel Becerra site sits in the Salamanca district. Runs corporate wellbeing already.</td><td class="prop">Community partner; corporate-wellbeing cross-sell.</td><td class="src"><a href="https://o2cw.es/contacto/">O2 contact</a></td><td>Not started</td><td class="next">Call Manuel Becerra site</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Anamaya Project</td><td>C · Wellness community</td><td>—</td><td>Founders</td><td class="mono"><span class="tag tag-n">not published</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@anamayaproject</td><td class="mono">anamayaproject.com</td><td class="why">Runs immersive wellness events fusing movement, breathwork, sound and live music — an audience already buying ticketed conscious-movement experiences.</td><td class="prop">Community partner or co-promotion; closest audience overlap of any list here.</td><td class="src"><a href="https://www.anamayaproject.com/">anamayaproject.com</a></td><td>Not started</td><td class="next">Instagram DM founders</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Respira / Academia Respira</td><td>C · Breathwork</td><td>—</td><td>Founder / Instructor</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">respira.pro</td><td class="why">Spain's most established breathing/cold-exposure training group, working with companies, executives and athletes. Credibility partner as much as distribution.</td><td class="prop">Content/credibility collaboration; access to their trained-practitioner list.</td><td class="src"><a href="https://respira.pro/certificacion-breathwork/">respira.pro</a></td><td>Not started</td><td class="next">Site form; propose co-billing</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">InterNations Madrid</td><td>F · Expat</td><td>Nicolás Galán</td><td>Community Consul</td><td class="mono"><span class="tag tag-n">platform DM</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">meetup.com/<wbr>internations-madrid-<wbr>expat-community</td><td class="why">Large organised international community in Madrid with a scheduled events calendar and named local hosts.</td><td class="prop">Community partner; list the experience as an official community activity.</td><td class="src"><a href="https://www.meetup.com/es-es/internations-madrid-expat-community/">Meetup group</a></td><td>Not started</td><td class="next">Message consul via platform</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Madrid Expats (Meetup)</td><td>F · Expat</td><td>—</td><td>Organiser</td><td class="mono"><span class="tag tag-n">platform DM</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">meetup.com/madrid-expats</td><td class="why">Weekly social events for internationals; English-first audience with disposable income and appetite for novel plans.</td><td class="prop">Community partner; co-listed event + code.</td><td class="src"><a href="https://www.meetup.com/madrid-expats/">Meetup group</a></td><td>Not started</td><td class="next">Message organiser</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">American Club of Madrid</td><td>F · Expat</td><td>—</td><td>Board / Events</td><td class="mono"><span class="tag tag-n">not published</span></td><td class="mono">—</td><td class="mono">/company/<wbr>american-club-of-madrid</td><td class="mono">—</td><td class="mono">—</td><td class="why">Social and professional organisation for internationals in Madrid, explicitly open to companies wanting to reach its network.</td><td class="prop">Community partner; member rate.</td><td class="src"><a href="https://www.linkedin.com/company/american-club-of-madrid">LinkedIn page</a></td><td>Not started</td><td class="next">LinkedIn message to page admin</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Madrid Secreto (Secret Media Network / Fever)</td><td>H · Media</td><td>—</td><td>Brand Partnerships</td><td class="mono"><span class="tag tag-n">team, no public address</span></td><td class="mono">—</td><td class="mono">/company/madrid-secreto</td><td class="mono">@madrid_secreto</td><td class="mono">madridsecreto.co</td><td class="why">~1M followers, the dominant "things to do in Madrid" channel, with an actual brand-partnership team used to paid placements.</td><td class="prop">Paid or barter placement in a race-week plans round-up. Highest reach on the list.</td><td class="src"><a href="https://muckrack.com/media-outlet/madridsecreto">Muck Rack profile</a></td><td>Not started</td><td class="next">Enquire via site partnerships form</td></tr>
+
+<tr><td><span class="pri pri-B">B</span></td><td class="co">Madrid Cool Blog</td><td>H · Media</td><td>—</td><td>Editor</td><td class="mono"><span class="tag tag-n">contact form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@madridcoolblog</td><td class="mono">madridcoolblog.com</td><td class="why">~50k engaged followers, curating "special places in Madrid" since 2009. Smaller but far more trusted per-follower than a mass account.</td><td class="prop">Editorial feature or paid collaboration.</td><td class="src"><a href="https://www.madridcoolblog.com/en/contact/">Contact page</a></td><td>Not started</td><td class="next">Submit contact form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Hotel Riu Plaza España — 360° Rooftop</td><td>A · Hotel</td><td>—</td><td>Events</td><td class="mono"><span class="tag tag-n">not published</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@riu360rooftopbar</td><td class="mono">riu360rooftopbar.com</td><td class="why">27th-floor rooftop, one of Madrid's highest. Huge visibility but a high-traffic paid-entry tourist venue — least "premium private" of the shortlist.</td><td class="prop">Venue partner; morning use before 11:00 public opening.</td><td class="src"><a href="https://www.riu360rooftopbar.com/en/">Rooftop site</a></td><td>Not started</td><td class="next">Enquire via rooftop site</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Hotel Fénix, a Gran Meliá Hotel</td><td>A · Hotel</td><td>—</td><td>Events</td><td class="mono"><span class="tag tag-n">via Meliá form</span></td><td class="mono">—</td><td class="mono">/company/melia-hotels<wbr>-international</td><td class="mono">@granmeliafenix</td><td class="mono">melia.com</td><td class="why">Plaza de Colón; recommended in F1 race-week luxury travel guides, so likely to have race-weekend guests in-house.</td><td class="prop">Venue partner or guest-facing experience add-on.</td><td class="src"><a href="https://www.melia.com/en/hotels/spain/madrid/fenix-gran-melia/meetings">Meliá meetings</a></td><td>Not started</td><td class="next">Meliá events form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Ten Con Ten</td><td>A · Venue</td><td>—</td><td>Private events</td><td class="mono"><span class="tag tag-n">via Privateaser</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@tencontenmadrid</td><td class="mono">—</td><td class="why">Ayala 6, Salamanca — a canonical Salamanca social address, bookable for private events.</td><td class="prop">Venue partner; morning privatisation.</td><td class="src"><a href="https://www.privateaser.es/local/5202-ten-con-ten">Privateaser listing</a></td><td>Not started</td><td class="next">Enquire via Privateaser</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">BioSpa Madrid</td><td>C · Wellness</td><td>Thomas <span class="tag tag-n">surname not public</span></td><td>Founder</td><td class="mono"><span class="tag tag-n">not published</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="why">Velázquez 138; described as an early biohacking centre in Spain, infrared sauna + ice bath. Small but precisely on-audience.</td><td class="prop">Community partner; cross-promotion to biohacking clientele.</td><td class="src"><a href="https://www.airbnb.com/services/6832136">Public service listing</a></td><td>Not started</td><td class="next">Visit / call in person</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Utopicus</td><td>G · Founders</td><td>—</td><td>Community</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/utopicus</td><td class="mono">@utopicus</td><td class="mono">utopicus.es</td><td class="why">Premium Madrid coworking with a members' club, wellness services and a standing events programme for entrepreneurs.</td><td class="prop">Community partner; member code + internal comms slot.</td><td class="src"><a href="https://utopicus.es/en">utopicus.es</a></td><td>Not started</td><td class="next">Site form to community team</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">The Shed Coworking</td><td>G · Founders</td><td>—</td><td>Community</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@theshedcoworking</td><td class="mono">theshedcoworking.com</td><td class="why">Salamanca coworking operating since 2013 with an events culture and an international member base.</td><td class="prop">Community partner; member allocation.</td><td class="src"><a href="https://www.theshedcoworking.com/en/">theshedcoworking.com</a></td><td>Not started</td><td class="next">Site form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Endeavor Spain</td><td>G · Founders</td><td>—</td><td>Network</td><td class="mono">insight@endeavor.org <span class="tag tag-n">global</span></td><td class="mono">—</td><td class="mono">/company/endeavor-spain</td><td class="mono">—</td><td class="mono">endeavor.org</td><td class="why">Selects and supports high-growth founders in Spain — small network, very high average purchasing power.</td><td class="prop">Community partner; founder allocation.</td><td class="src"><a href="https://endeavor.org/spainfounderpathways/">Endeavor Spain</a></td><td>Not started</td><td class="next">Email global, ask for Spain lead</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">South Summit</td><td>G · Founders</td><td>—</td><td>Community / Partnerships</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/south-summit</td><td class="mono">@southsummit</td><td class="mono">southsummit.io</td><td class="why">Runs Madrid's largest founder gathering and maintains a year-round community channel with thousands of Madrid entrepreneurs.</td><td class="prop">Community listing; possible partner-perk placement.</td><td class="src"><a href="https://www.southsummit.io/e/madrid/en">southsummit.io</a></td><td>Not started</td><td class="next">Partnerships form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Wayra (Telefónica)</td><td>G · Founders</td><td>—</td><td>Community</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/wayra</td><td class="mono">@wayra_es</td><td class="mono">wayra.es</td><td class="why">Telefónica's innovation hub with a Madrid portfolio-founder community and internal comms reach.</td><td class="prop">Community partner; portfolio perk.</td><td class="src"><a href="https://www.wayra.es/">wayra.es</a></td><td>Not started</td><td class="next">Site form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">AmCham Spain</td><td>F · International business</td><td>—</td><td>Events</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/amchamspain</td><td class="mono">—</td><td class="mono">amchamspain.com</td><td class="why">Alcalá 54, Madrid. US–Spain business community: senior, international, high-income, event-driven.</td><td class="prop">Community partner; member communication.</td><td class="src"><a href="https://www.cbinsights.com/company/american-chamber-of-commerce-spain">Company profile</a></td><td>Not started</td><td class="next">Events contact form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Edge Global Events</td><td>D · F1 hospitality</td><td>—</td><td>Client experience</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/edge-global-events</td><td class="mono">—</td><td class="mono">edgeglobalevents.com</td><td class="why">Sells Madrid GP hospitality with 5-star city-centre hotels and luxury transfers — their clients are the highest-spend F1 visitors in the city.</td><td class="prop">Add Racing Thoughts as an optional Friday-morning add-on for their Madrid clients; commission per booking.</td><td class="src"><a href="https://edgeglobalevents.com/f1-hospitality/madrid/">Edge Madrid page</a></td><td>Not started</td><td class="next">Contact form; propose add-on</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Race Experiences</td><td>D · F1 hospitality</td><td>—</td><td>Packages</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">raceexperiences.com</td><td class="why">Sells Madrid GP hotel + ticket packages to international visitors, with English-speaking hosts on the ground.</td><td class="prop">Optional experience add-on; commission per booking.</td><td class="src"><a href="https://raceexperiences.com/formula-1/spanish-grand-prix-tickets-packages-f1-madrid/">Race Experiences Madrid</a></td><td>Not started</td><td class="next">Contact form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Grandstand Motor Sports</td><td>D · F1 travel</td><td>—</td><td>Packages</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/<wbr>grandstand-motor-sports</td><td class="mono">—</td><td class="mono">grandstand<wbr>motorsports.co.uk</td><td class="why">UK operator running flight-inclusive Madrid GP packages with dedicated on-trip reps — a captive English-speaking group with free Friday mornings.</td><td class="prop">Add-on experience for their Madrid travellers.</td><td class="src"><a href="https://www.grandstandmotorsports.co.uk/event/madrid-grand-prix/">Grandstand Madrid GP</a></td><td>Not started</td><td class="next">Contact form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">MADRING Official Hospitality</td><td>D · F1 official</td><td>—</td><td>Hospitality</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">/company/madring</td><td class="mono">@madringofficial</td><td class="mono">hospitality.madring.com</td><td class="why">The circuit's own hospitality arm. Unlikely to partner with an unaffiliated event, but worth one enquiry — and useful for understanding the weekend's official programming.</td><td class="prop">Enquiry only. <strong>Do not</strong> imply any official F1 affiliation in any material.</td><td class="src"><a href="https://hospitality.madring.com/en/home/">MADRING hospitality</a></td><td>Not started</td><td class="next">Single enquiry, low expectation</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">The Formula 1 Exhibition — Madrid</td><td>D · F1 audience</td><td>—</td><td>Partnerships</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">@f1exhibition</td><td class="mono">f1exhibition.com/madrid</td><td class="why">A ticketed F1 exhibition in Madrid — a pre-qualified, locally-resident F1 audience that has already paid for an F1-adjacent experience.</td><td class="prop">Cross-promotion to their Madrid visitor list. Careful trademark separation required.</td><td class="src"><a href="https://f1exhibition.com/madrid/">f1exhibition.com</a></td><td>Not started</td><td class="next">Partnerships enquiry</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Aurum Experience</td><td>E · Concierge</td><td>Nuria Barbara Pujol <span class="tag tag-n">no direct</span></td><td>Founder</td><td class="mono"><span class="tag tag-n">not published</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">aurumexperience.com</td><td class="why">Luxury concierge operating in Spain, serving exactly the discreet high-net-worth visitor profile.</td><td class="prop">Affiliate commission on referred guests.</td><td class="src"><a href="https://aurumexperience.com/luxury-concierge-madrid-the-privilege-of-peace-of-mind/">Aurum site</a></td><td>Not started</td><td class="next">Site form; ask for founder</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">3e Luxury Services</td><td>E · Concierge / DMC</td><td>—</td><td>Concierge</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">3els.com</td><td class="why">DMC and concierge covering Spain with tailor-made experiences for inbound luxury clients.</td><td class="prop">Add to their Madrid race-week experience menu; commission.</td><td class="src"><a href="https://3els.com/servicios/?lang=en">3els services</a></td><td>Not started</td><td class="next">Site form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">DMC Spain Society — Madrid</td><td>E · DMC</td><td>—</td><td>Madrid desk</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">dmcspainsociety.com</td><td class="why">DMC network handling incoming corporate and incentive groups in Madrid — a route to whole corporate groups rather than individuals.</td><td class="prop">Add as a bookable incentive-group activity.</td><td class="src"><a href="https://www.dmcspainsociety.com/dmcmadrid/">DMC Madrid</a></td><td>Not started</td><td class="next">Site form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Luxury Moments Group</td><td>E · Concierge</td><td>—</td><td>Lifestyle management</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">luxurymomentsgroup.com</td><td class="why">Lifestyle-management company serving high-net-worth clients in Spain.</td><td class="prop">Affiliate commission.</td><td class="src"><a href="https://luxurymomentsgroup.com/en/luxury-services-spain/">Luxury Moments</a></td><td>Not started</td><td class="next">Site form</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Maison Infrared — Madrid recovery network</td><td>C · Wellness</td><td>—</td><td>Partnerships</td><td class="mono"><span class="tag tag-n">site form</span></td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">maisoninfrared.com</td><td class="why">Curates Madrid's infrared and recovery studio network — one contact reaching several recovery-studio audiences at once.</td><td class="prop">Listing/cross-promotion across their Madrid network.</td><td class="src"><a href="https://maisoninfrared.com/pages/madrid-infrared-recovery">Maison Infrared Madrid</a></td><td>Not started</td><td class="next">Partnerships enquiry</td></tr>
+
+<tr><td><span class="pri pri-C">C</span></td><td class="co">Time Out Madrid</td><td>H · Media</td><td>—</td><td>Editorial</td><td class="mono"><span class="tag tag-n">editorial form</span></td><td class="mono">—</td><td class="mono">/company/time-out-group</td><td class="mono">@timeoutmadrid</td><td class="mono">timeout.es/madrid</td><td class="why">Runs race-week "what's on" round-ups and wellness listings. Free editorial coverage if pitched as a genuine race-week novelty.</td><td class="prop">Editorial pitch, not paid. Angle: the only wellness event built around race week.</td><td class="src"><a href="https://www.timeout.es/madrid/es">Time Out Madrid</a></td><td>Not started</td><td class="next">Pitch listings editor</td></tr>
+
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="venue-mail">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03 / OUTREACH</span>
+      <h2>Top 10 venue emails</h2>
+      <p class="sec-sub">Each one carries a <span class="hook">highlighted sentence</span> built from something I actually verified about that property — capacity, opening hour, a named space, street access. That sentence is the whole point; without it these are the same email ten times. Note that none of them mention rental cost: the first ask is always partnership.</p>
+    </div>
+
+    <div class="mailgrid">
+
+<article class="mail"><div class="mail-h"><div><h3>1 · BLESS Hotel Madrid — Picos Pardos Sky Lounge</h3><div class="mail-to">mice.madrid@blesscollectionhotels.com · cc picospardos@blesscollectionhotels.com</div></div><button class="copy" data-copy="m1">Copy</button></div><div class="mail-b" id="m1"><span class="subj">Subject: Madrid F1 Weekend — Partnership Proposal: Racing Thoughts</span>Hola,
+
+We're creating a small premium experience in Madrid on the morning of the Formula 1 weekend and believe BLESS Madrid could be an exceptional partner.
+
+On Friday 11 September, 09:00–10:30, we'll host:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+An immersive 90-minute experience for just 30 guests, led by Elina Kadaja. Through guided breathwork, nervous-system regulation, interoceptive training and somatic/fascial work, guests explore one central idea: "When everything around you is moving at 300 km/h, can your nervous system keep up?"
+
+We're also exploring individual wireless headsets to make the experience fully immersive.
+
+Rather than simply hiring a venue, we'd love to explore a partnership. We would produce and facilitate the entire experience, bring our own guests, and handle marketing — while BLESS provides the setting and, if of interest, offers priority access to hotel guests during one of the biggest weekends in Madrid's calendar.
+
+<span class="hook">Concretely: we'd be asking for Picos Pardos between 09:00 and 10:30, hours before the sky lounge opens to the public — so the space would be generating visibility and content during a window when it currently generates nothing. The Velázquez views are exactly the setting this concept was written for.</span>
+
+Would you be open to a 15-minute conversation this week? I'd be happy to send the visual concept and full proposal.
+
+Best,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>2 · The Madrid EDITION — Oroya &amp; The Roof</h3><div class="mail-to">oroya.madrid@editionhotels.com</div></div><button class="copy" data-copy="m2">Copy</button></div><div class="mail-b" id="m2"><span class="subj">Subject: Madrid F1 Weekend — Partnership Proposal: Racing Thoughts</span>Hi,
+
+We're creating a small premium experience in Madrid on the morning of the Formula 1 weekend and believe The Madrid EDITION could be an exceptional partner.
+
+On Friday 11 September, 09:00–10:30, we'll host:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+An immersive 90-minute experience for just 30 guests, led by Elina Kadaja. Through guided breathwork, nervous-system regulation, interoceptive training and somatic/fascial work, guests explore one central idea: "When everything around you is moving at 300 km/h, can your nervous system keep up?"
+
+We're also exploring individual wireless headsets to make the experience fully immersive.
+
+Rather than simply hiring a venue, we'd love to explore a partnership. We produce and facilitate; EDITION provides the setting and, if of interest, offers priority access to guests during race weekend.
+
+<span class="hook">We looked closely at Oroya specifically — at 145 m² with a 75-guest cocktail capacity, it comfortably fits 30 guests on mats with the circulation a somatic session needs, which is rarer among Madrid rooftops than you'd expect. And EDITION is one of the few brands in the city already programming wellness as culture rather than as an amenity, which is exactly the register this experience sits in.</span>
+
+Would you be open to a 15-minute conversation this week? I'd be glad to send the visual concept and full proposal.
+
+Best,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>3 · Círculo de Bellas Artes — La Azotea</h3><div class="mail-to">eventosexternos@circulobellasartes.com</div></div><button class="copy" data-copy="m3">Copy</button></div><div class="mail-b" id="m3"><span class="subj">Subject: Fin de semana F1 Madrid — Propuesta de partnership: Racing Thoughts</span>Hola,
+
+Estamos creando una experiencia premium de formato reducido en Madrid la mañana del fin de semana de Fórmula 1, y creemos que la Azotea del Círculo podría ser un partner excepcional.
+
+El viernes 11 de septiembre, de 09:00 a 10:30, celebraremos:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+Una experiencia inmersiva de 90 minutos para solo 30 personas, dirigida por Elina Kadaja. A través de breathwork guiado, regulación del sistema nervioso, entrenamiento interoceptivo y trabajo somático y fascial, los participantes exploran una idea central: "Cuando todo a tu alrededor se mueve a 300 km/h, ¿puede tu sistema nervioso seguir el ritmo?"
+
+Estamos valorando también auriculares inalámbricos individuales para hacer la experiencia completamente inmersiva.
+
+Más que alquilar un espacio, nos gustaría explorar un partnership: nosotros producimos, facilitamos, hacemos el marketing y traemos a los participantes; el Círculo aporta el escenario.
+
+<span class="hook">Nos dirigimos al Círculo antes que a ningún hotel por una razón concreta: este proyecto se sostiene sobre neurociencia y práctica somática, no sobre ocio, y encaja mucho mejor en una institución cultural que en una terraza de hotel. La azotea a 56 metros, con Minerva presidiendo la ciudad, es además el marco exacto que describe el concepto.</span>
+
+¿Tendríais disponibilidad para una conversación de 15 minutos esta semana? Os envío encantado el concepto visual y la propuesta completa.
+
+Un saludo,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>4 · Only YOU Boutique Hotel Madrid</h3><div class="mail-to">madrid@onlyyouhotels.com</div></div><button class="copy" data-copy="m4">Copy</button></div><div class="mail-b" id="m4"><span class="subj">Subject: Fin de semana F1 Madrid — Propuesta de partnership: Racing Thoughts</span>Hola,
+
+Estamos creando una experiencia premium de formato reducido en Madrid la mañana del fin de semana de Fórmula 1, y creemos que Only YOU Boutique podría ser un partner excepcional.
+
+El viernes 11 de septiembre, de 09:00 a 10:30, celebraremos:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+Una experiencia inmersiva de 90 minutos para solo 30 personas, dirigida por Elina Kadaja. Breathwork guiado, regulación del sistema nervioso, entrenamiento interoceptivo y trabajo somático y fascial, alrededor de una idea: "Cuando todo a tu alrededor se mueve a 300 km/h, ¿puede tu sistema nervioso seguir el ritmo?"
+
+Estamos valorando además auriculares inalámbricos individuales para una experiencia totalmente inmersiva.
+
+Más que alquilar un espacio, nos gustaría plantear un partnership: nosotros producimos, facilitamos y traemos a los participantes; vosotros aportáis el espacio y, si os interesa, ofrecéis acceso prioritario a vuestros huéspedes durante el fin de semana de carrera.
+
+<span class="hook">Os escribimos en primer lugar por un detalle muy concreto: sois de los pocos espacios de Madrid que ya indicáis públicamente disponibilidad para celebraciones desde las 09:00. Eso significa que nuestra franja no os obliga a abrir antes ni a reorganizar turnos — encaja en una operativa que ya tenéis en marcha.</span>
+
+¿Podríamos hablar 15 minutos esta semana? Os comparto el concepto visual y la propuesta completa.
+
+Un saludo,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>5 · Club Financiero Génova</h3><div class="mail-to">eventos@espaciocfg.com · cc socios@clubfinancierogenova.com</div></div><button class="copy" data-copy="m5">Copy</button></div><div class="mail-b" id="m5"><span class="subj">Subject: Fin de semana F1 Madrid — Partnership y experiencia para socios: Racing Thoughts</span>Hola,
+
+Estamos creando una experiencia premium de formato reducido en Madrid la mañana del fin de semana de Fórmula 1, y el Club Financiero Génova es el único sitio de nuestra lista que encaja por dos vías a la vez.
+
+El viernes 11 de septiembre, de 09:00 a 10:30:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+Una experiencia inmersiva de 90 minutos para 30 personas, dirigida por Elina Kadaja. Breathwork guiado, regulación del sistema nervioso, entrenamiento interoceptivo y trabajo somático, en torno a una idea: "El alto rendimiento no consiste en estar siempre en calma, sino en saber cambiar de marcha."
+
+<span class="hook">La doble vía es esta: por un lado, vuestra azotea sobre Plaza de Colón es un escenario extraordinario a una hora en la que está vacía. Por otro —y para nosotros es lo más interesante— vuestros socios son exactamente el perfil al que va dirigida la experiencia: directivos que operan bajo presión sostenida y que rara vez tienen un espacio para entrenar la parte fisiológica de eso.</span>
+
+Nosotros producimos, facilitamos y gestionamos la experiencia completa. Ofreceríamos plazas gratuitas para la junta directiva y una tarifa exclusiva de socio para el resto.
+
+¿Tendríais 15 minutos esta semana? Os envío el concepto visual y la propuesta completa.
+
+Un saludo,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>6 · VP Plaza España Design — Ginkgo Sky Bar</h3><div class="mail-to">comercialplaza@vphoteles.com · cc ginkgo@vphoteles.com</div></div><button class="copy" data-copy="m6">Copy</button></div><div class="mail-b" id="m6"><span class="subj">Subject: Fin de semana F1 Madrid — Propuesta de partnership: Racing Thoughts</span>Hola,
+
+Estamos creando una experiencia premium de formato reducido la mañana del fin de semana de Fórmula 1 en Madrid, y creemos que Ginkgo podría ser un partner excepcional.
+
+El viernes 11 de septiembre, de 09:00 a 10:30:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+90 minutos inmersivos para solo 30 personas, dirigidos por Elina Kadaja: breathwork guiado, regulación del sistema nervioso, entrenamiento interoceptivo y trabajo somático y fascial. Idea central: "Cuando todo a tu alrededor se mueve a 300 km/h, ¿puede tu sistema nervioso seguir el ritmo?"
+
+Estamos valorando auriculares inalámbricos individuales para una experiencia completamente inmersiva.
+
+Más que alquilar el espacio, nos gustaría plantear un partnership: producimos, facilitamos, hacemos marketing y traemos a los participantes; vosotros aportáis el escenario.
+
+<span class="hook">Dos cosas concretas nos hicieron poner a Ginkgo en cabeza: el acceso directo desde la calle, que nos permite recibir a 30 personas a las 09:00 sin que atraviesen el hotel ni interfieran con el check-out, y la combinación de zona cubierta y descubierta en la planta 12, que nos da un plan B real si esa mañana el tiempo no acompaña.</span>
+
+¿Podríamos hablar 15 minutos esta semana? Os envío el concepto visual y la propuesta completa.
+
+Un saludo,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>7 · Thompson Madrid — Makáá rooftop</h3><div class="mail-to">madrp.rfp@thompsonhotels.com</div></div><button class="copy" data-copy="m7">Copy</button></div><div class="mail-b" id="m7"><span class="subj">Subject: Madrid F1 Weekend — Partnership Proposal: Racing Thoughts</span>Hi,
+
+We're creating a small premium experience in Madrid on the morning of the Formula 1 weekend and believe Thompson Madrid could be an exceptional partner.
+
+On Friday 11 September, 09:00–10:30, we'll host:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+An immersive 90-minute experience for just 30 guests, led by Elina Kadaja. Through guided breathwork, nervous-system regulation, interoceptive training and somatic/fascial work, guests explore one central idea: "High performance isn't about being calm all the time. It's about knowing how to shift gears."
+
+We're also exploring individual wireless headsets to make the experience fully immersive.
+
+Rather than simply hiring a venue, we'd love to explore a partnership. We produce and facilitate the experience and bring the guests; Thompson provides the setting and, if of interest, offers priority access to hotel guests during race weekend.
+
+<span class="hook">Makáá is the specific reason we're writing. A rooftop built around live fire, with 360° views and an infinity pool, is a genuinely striking place to sit with the idea of shifting gears — and at 09:00 it's yours to lend us before the grill is lit. With 600+ m² of indoor and outdoor event space, you also have the weather contingency that most Madrid rooftops don't.</span>
+
+Would you be open to a 15-minute conversation this week? I'd be glad to send the visual concept and full proposal.
+
+Best,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>8 · Hyatt Centric Gran Vía — El Jardín de Diana</h3><div class="mail-to">Via hotel switchboard — ask for Marta Casas, events</div></div><button class="copy" data-copy="m8">Copy</button></div><div class="mail-b" id="m8"><span class="subj">Subject: Fin de semana F1 Madrid — Propuesta de partnership: Racing Thoughts</span>Hola Marta,
+
+Estamos creando una experiencia premium de formato reducido la mañana del fin de semana de Fórmula 1 en Madrid, y creemos que El Jardín de Diana podría ser un partner excepcional.
+
+El viernes 11 de septiembre, de 09:00 a 10:30:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+90 minutos inmersivos para solo 30 personas, dirigidos por Elina Kadaja: breathwork guiado, regulación del sistema nervioso, entrenamiento interoceptivo y trabajo somático y fascial. Idea central: "Cuando todo a tu alrededor se mueve a 300 km/h, ¿puede tu sistema nervioso seguir el ritmo?"
+
+Nosotros producimos, facilitamos, hacemos el marketing y traemos a los participantes. Vosotros aportáis el espacio y, si os encaja, ofrecéis acceso prioritario a vuestros huéspedes durante el fin de semana de carrera.
+
+<span class="hook">El Jardín de Diana nos interesa por una razón muy práctica: 270 m² repartidos entre interior y exterior en una planta décima es una de las pocas configuraciones de Madrid donde 30 personas caben tumbadas con holgura y, si el tiempo cambia, se resuelve moviéndose dentro en lugar de cancelando. Que además sea un edificio art déco con torres sobre Gran Vía convierte el escenario en parte de la experiencia.</span>
+
+¿Podríamos hablar 15 minutos esta semana? Te envío el concepto visual y la propuesta completa.
+
+Un saludo,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>9 · Wellington Hotel &amp; Spa Madrid</h3><div class="mail-to">info@hotel-wellington.com — request routing to Le Max Wellness Club / spa direction</div></div><button class="copy" data-copy="m9">Copy</button></div><div class="mail-b" id="m9"><span class="subj">Subject: Fin de semana F1 Madrid — Propuesta de partnership wellness: Racing Thoughts</span>Hola,
+
+Os escribo para pedir que hagáis llegar este mensaje a la dirección de Le Max Wellness Club, porque la propuesta encaja más con wellness que con el departamento de eventos.
+
+Estamos creando una experiencia premium de formato reducido la mañana del fin de semana de Fórmula 1 en Madrid. El viernes 11 de septiembre, de 09:00 a 10:30:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+90 minutos inmersivos para solo 30 personas, dirigidos por Elina Kadaja: breathwork guiado, regulación del sistema nervioso, entrenamiento interoceptivo y trabajo somático y fascial. Idea central: "El alto rendimiento no consiste en estar siempre en calma, sino en saber cambiar de marcha."
+
+Más que alquilar un espacio, planteamos un partnership: nosotros producimos, facilitamos y traemos a los participantes; el hotel aporta el escenario y suma una experiencia diferencial a su programación de esa semana.
+
+<span class="hook">Escribimos al Wellington antes que a otros cinco estrellas porque ya tenéis una propuesta de bienestar consolidada y un socio de club acostumbrado a este tipo de práctica — no habría que explicar el concepto desde cero. Y la piscina de la azotea, todavía en temporada el 11 de septiembre, está vacía a las 09:00: es la hora en la que menos os cuesta cedernos el espacio y más nos aporta a nosotros.</span>
+
+¿Sería posible una conversación de 15 minutos esta semana? Envío encantado el concepto visual y la propuesta completa.
+
+Un saludo,
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>10 · Rosewood Villa Magna</h3><div class="mail-to">villamagna.reservations@rosewoodhotels.com — request routing to the events team</div></div><button class="copy" data-copy="m10">Copy</button></div><div class="mail-b" id="m10"><span class="subj">Subject: Madrid F1 Weekend — Partnership Proposal: Racing Thoughts</span>Hi,
+
+Could I ask you to pass this to your events team — it's a partnership proposal rather than a booking enquiry.
+
+We're creating a small premium experience in Madrid on the morning of the Formula 1 weekend and believe Rosewood Villa Magna could be an exceptional partner.
+
+On Friday 11 September, 09:00–10:30, we'll host:
+
+RACING THOUGHTS — The Pre-Race Nervous System Experience
+
+An immersive 90-minute experience for just 30 guests, led by Elina Kadaja. Through guided breathwork, nervous-system regulation, interoceptive training and somatic/fascial work, guests explore one central idea: "When everything around you is moving at 300 km/h, can your nervous system keep up?"
+
+Rather than simply hiring a venue, we'd love to explore a partnership. We produce, facilitate, market and bring the guests; Villa Magna provides the setting and, if of interest, offers priority access to guests during race weekend.
+
+<span class="hook">Villa Magna sits on Castellana in the middle of Salamanca, which means your immediate neighbourhood is the precise audience for this: senior professionals whose working lives are an exercise in sustained pressure. We'd be borrowing a room for the 90 minutes of the day when your event spaces are quietest, and filling it with exactly the people you'd want walking through your lobby.</span>
+
+Would you be open to a 15-minute conversation this week? I'd be glad to send the visual concept and full proposal.
+
+Best,
+Alejandro</div></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="comm-mail">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04 / DISTRIBUTION</span>
+      <h2>Top 10 community &amp; partnership emails</h2>
+      <p class="sec-sub">Deliberately short. The job of each of these is to get a reply, not to explain the event — every extra paragraph lowers the response rate. Language follows the audience, not the sender.</p>
+    </div>
+
+    <div class="mailgrid">
+
+<article class="mail"><div class="mail-h"><div><h3>1 · Corazón Studio</h3><div class="mail-to">hello@corazon-studio.com</div></div><button class="copy" data-copy="c1">Copy</button></div><div class="mail-b" id="c1"><span class="subj">Subject: F1 weekend — founding studio partner (only asking one studio)</span>Hi,
+
+On Friday 11 September, 09:00–10:30 — the morning of the F1 weekend — we're running a 90-minute nervous-system experience in Madrid for 30 people. Breathwork, interoceptive training, somatic and fascial work, led by Elina Kadaja.
+
+We're offering one Salamanca studio a founding-partner role, and we'd like it to be Corazón:
+
+· A member code with priority access before public release
+· Complimentary places for you and your teachers
+· Co-billing on all our content
+· Revenue share if you'd prefer that
+
+The only thing we'd ask is one mail-out to your members.
+
+Worth a quick call this week?
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>2 · ARO Madrid</h3><div class="mail-to">hello@movewitharo.com</div></div><button class="copy" data-copy="c2">Copy</button></div><div class="mail-b" id="c2"><span class="subj">Subject: F1 weekend collaboration — you already speak this language</span>Hi,
+
+You're the studio in Madrid we'd least have to explain this to.
+
+Friday 11 September, 09:00–10:30, F1 weekend: a 90-minute nervous-system experience for 30 people — breathwork, interoceptive training, somatic and fascial work, led by Elina Kadaja. Framed around performance and self-regulation under pressure rather than relaxation.
+
+Given you already run breathwork, sound and contrast work, we'd love to explore:
+
+· Priority access and a member code for your community
+· Complimentary places for your team
+· Co-billing, or a co-facilitated warm-up session beforehand
+
+15 minutes this week?
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>3 · GONG Club de Yoga</h3><div class="mail-to">recepcion@elgong.es · WhatsApp 638 555 597</div></div><button class="copy" data-copy="c3">Copy</button></div><div class="mail-b" id="c3"><span class="subj">Subject: Fin de semana F1 — colaboración con vuestra comunidad</span>Hola,
+
+El viernes 11 de septiembre, de 09:00 a 10:30 —fin de semana de F1— hacemos una experiencia de sistema nervioso de 90 minutos en Madrid para 30 personas: breathwork, entrenamiento interoceptivo y trabajo somático y fascial, dirigido por Elina Kadaja.
+
+Como ya trabajáis respiración funcional, vuestra comunidad no necesita que le expliquemos nada. Os proponemos:
+
+· Código de socio con acceso prioritario
+· Plazas de cortesía para vosotros y vuestro equipo
+· Mención como community partner en toda la comunicación
+
+Solo pediríamos un envío a vuestros socios. ¿Hablamos 10 minutos esta semana?
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>4 · Revive Wellness Hub</h3><div class="mail-to">WhatsApp +34 654 87 30 78 (Salamanca) — their stated fast channel</div></div><button class="copy" data-copy="c4">Copy</button></div><div class="mail-b" id="c4"><span class="subj">Subject: Fin de semana F1 — colaboración recovery x performance</span>Hola,
+
+Viernes 11 de septiembre, 09:00–10:30, fin de semana de F1: experiencia de sistema nervioso de 90 minutos en Madrid, 30 plazas. Breathwork, entrenamiento interoceptivo y trabajo somático, con Elina Kadaja.
+
+Vuestros socios de recovery son exactamente el perfil. Os ofrecemos:
+
+· Código exclusivo con acceso prioritario
+· Plazas de cortesía para vuestro equipo
+· Community partner en toda la comunicación
+· Comisión por venta si preferís ese formato
+
+¿Os encaja una llamada rápida esta semana?
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>5 · Club Matador</h3><div class="mail-to">info@clubmatador.com</div></div><button class="copy" data-copy="c5">Copy</button></div><div class="mail-b" id="c5"><span class="subj">Subject: Fin de semana F1 — experiencia exclusiva para socios</span>Hola,
+
+El viernes 11 de septiembre, de 09:00 a 10:30, durante el fin de semana de Fórmula 1, celebramos una experiencia de 90 minutos para 30 personas en Madrid: breathwork guiado, regulación del sistema nervioso y trabajo somático, dirigida por Elina Kadaja.
+
+Está construida sobre una idea, no sobre una clase: "El alto rendimiento no consiste en estar siempre en calma, sino en saber cambiar de marcha."
+
+Nos gustaría reservar una parte de las plazas para socios de Club Matador, con plazas de cortesía para la dirección del club.
+
+¿Podríamos hablar 15 minutos esta semana?
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>6 · MAD Members Club</h3><div class="mail-to">Instagram DM @madmembersclub + site enquiry form</div></div><button class="copy" data-copy="c6">Copy</button></div><div class="mail-b" id="c6"><span class="subj">Subject: A MAD Experience for F1 weekend — 09:00, not 21:00</span>Hi,
+
+Your calendar owns the Madrid evening. We'd like to propose something for the other end of the day.
+
+Friday 11 September, 09:00–10:30, F1 weekend: RACING THOUGHTS — a 90-minute nervous-system experience for 30 guests, led by Elina Kadaja. Breathwork, interoceptive training and somatic work, built around performance under pressure.
+
+For MAD members we'd offer:
+
+· A guaranteed member allocation
+· Complimentary places for your team
+· Co-branded content from the morning
+
+Could this sit inside MAD Experiences for race weekend? Happy to send the concept.
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>7 · Impact Hub Madrid</h3><div class="mail-to">madrid@impacthub.net</div></div><button class="copy" data-copy="c7">Copy</button></div><div class="mail-b" id="c7"><span class="subj">Subject: Fin de semana F1 — experiencia para vuestra comunidad de founders</span>Hola,
+
+Viernes 11 de septiembre, 09:00–10:30, fin de semana de F1 en Madrid: RACING THOUGHTS, una experiencia de 90 minutos para 30 personas dirigida por Elina Kadaja — breathwork, regulación del sistema nervioso y trabajo somático, enfocada a rendimiento y autorregulación bajo presión.
+
+Está pensada para quien trabaja en tensión sostenida, que describe bastante bien a vuestros 800 miembros.
+
+Os proponemos:
+
+· Código exclusivo para la comunidad Impact Hub
+· Plazas de cortesía para vuestro equipo
+· Community partner, o revenue share si lo preferís
+
+Solo pediríamos un espacio en vuestra comunicación interna. ¿Hablamos 15 minutos?
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>8 · EO Madrid</h3><div class="mail-to">Chapter contact form + Instagram DM @eomadrid</div></div><button class="copy" data-copy="c8">Copy</button></div><div class="mail-b" id="c8"><span class="subj">Subject: F1 weekend — a chapter experience on shifting gears</span>Hi,
+
+Friday 11 September, 09:00–10:30, during Madrid's F1 weekend: RACING THOUGHTS — a 90-minute nervous-system experience for 30 people, led by Elina Kadaja.
+
+Breathwork, interoceptive training and somatic work, built around one idea your members live daily: "High performance isn't about being calm all the time. It's about knowing how to shift gears."
+
+For EO Madrid we'd offer a reserved chapter allocation, complimentary places for board members, and a members' rate.
+
+Would this work as a chapter experience for race weekend? Happy to jump on a 15-minute call.
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>9 · InterNations Madrid / Madrid Expats</h3><div class="mail-to">Platform message to community consul / organiser</div></div><button class="copy" data-copy="c9">Copy</button></div><div class="mail-b" id="c9"><span class="subj">Subject: F1 weekend experience for the Madrid international community</span>Hi,
+
+Friday 11 September, 09:00–10:30 — the morning of Madrid's first F1 weekend — we're running RACING THOUGHTS: a 90-minute nervous-system experience for 30 people, led by Elina Kadaja. In English.
+
+It's for people who want the race-week energy without a grandstand ticket.
+
+For your community we can offer priority access, a community code, and complimentary places for you and your co-hosts.
+
+Could we list it as a community activity? Happy to send details.
+
+Alejandro</div></article>
+
+<article class="mail"><div class="mail-h"><div><h3>10 · Edge Global Events (F1 hospitality)</h3><div class="mail-to">Site contact form</div></div><button class="copy" data-copy="c10">Copy</button></div><div class="mail-b" id="c10"><span class="subj">Subject: Friday-morning add-on for your Madrid GP clients</span>Hi,
+
+Your Madrid GP clients have a gap on Friday morning before track action. We'd like to fill it.
+
+Friday 11 September, 09:00–10:30, central Madrid: RACING THOUGHTS — a 90-minute nervous-system experience for 30 guests, led by Elina Kadaja. Breathwork, interoceptive training and somatic work, themed around race-week performance. In English.
+
+We'd offer it as an optional add-on for your clients, with commission per booking and a guaranteed allocation held for you.
+
+We are an independent experience with no affiliation to Formula 1 — worth saying plainly up front.
+
+Is this worth 15 minutes?
+
+Alejandro</div></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="creators">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05 / CREATORS</span>
+      <h2>15 creator targets</h2>
+      <p class="sec-sub">An honest caveat first, because it changes how you use this list.</p>
+    </div>
+
+    <div class="note">
+      <strong>Only two of these fifteen have a publicly published business email</strong>, and I've given both in full. Creator contact addresses live in Instagram bios and app-only contact buttons, which aren't indexable — and this environment blocks direct page fetches, so I could not open bios to read them. Rather than invent fifteen plausible addresses, I've named the targets and marked exactly what needs your manual check. Budget 30 minutes in-app tomorrow: open each profile, tap "Email", record it. That half-hour is the only way to get this list to fifteen verified addresses, and no research tool will do it for you.
+    </div>
+
+    <div class="crgrid">
+
+<div class="cr"><div class="cr-top"><h4>Enrique R. del Bosque</h4><span class="foll">~592k IG</span></div><span class="handle">@delbosquef1 · TikTok 900k+</span><dl><dt>Email</dt><dd><strong>erdelbosque@cflw.mx</strong> <span class="tag tag-v">verified</span></dd><dt>Audience</dt><dd>Spanish-language F1, heavily Spain-weighted</dd><dt>Fit</dt><dd>Largest verified-contact Spanish F1 creator. Above your target size, but the only one with a published business address.</dd><dt>Ask</dt><dd>One race-week story + code. Paid placement likely required at this size.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Manon &amp; Maia</h4><span class="foll">micro/mid</span></div><span class="handle">@maniaonboard</span><dl><dt>Email</dt><dd><strong>contact@maniaonboard.co.uk</strong> <span class="tag tag-v">verified</span></dd><dt>Audience</dt><dd>International F1 travellers who attend races</dd><dt>Fit</dt><dd>Their audience physically travels to Grands Prix — the rare F1 following that will actually be in Madrid that weekend.</dd><dt>Ask</dt><dd>Two complimentary places + attend and post from the session.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Madrid Cool Blog</h4><span class="foll">~50k</span></div><span class="handle">@madridcoolblog</span><dl><dt>Contact</dt><dd>Contact form <span class="tag tag-n">verify</span></dd><dt>Audience</dt><dd>Madrid residents seeking curated city plans</dd><dt>Fit</dt><dd>Fifteen years of trust with local residents — your primary buyer, not F1 tourists.</dd><dt>Ask</dt><dd>Editorial feature or paid placement in a race-week round-up.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Madrid Secreto</h4><span class="foll">~1M</span></div><span class="handle">@madrid_secreto</span><dl><dt>Contact</dt><dd>Brand Partnerships team <span class="tag tag-n">verify</span></dd><dt>Audience</dt><dd>Mass Madrid resident audience</dd><dt>Fit</dt><dd>Widest local reach available. Low relevance density, so treat as paid reach rather than endorsement.</dd><dt>Ask</dt><dd>Paid placement. Only if a partner covers it.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Marcos Apud</h4><span class="foll">verify</span></div><span class="handle">Spanish biohacking / longevity</span><dl><dt>Contact</dt><dd><span class="tag tag-n">verify in bio</span></dd><dt>Audience</dt><dd>Spanish-speaking longevity, neuroscience, high performance</dd><dt>Fit</dt><dd>Closest topical match in Spanish: neuroscience and performance rather than generic wellness.</dd><dt>Ask</dt><dd>Complimentary place + co-created content on interoception.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Respira / Academia Respira</h4><span class="foll">niche</span></div><span class="handle">respira.pro</span><dl><dt>Contact</dt><dd>Site form <span class="tag tag-n">verify</span></dd><dt>Audience</dt><dd>Spanish breathwork practitioners, executives, athletes</dd><dt>Fit</dt><dd>Credibility more than reach — an endorsement here de-risks the concept for sceptical buyers.</dd><dt>Ask</dt><dd>Endorsement or joint content; practitioner-list distribution.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Anamaya Project</h4><span class="foll">niche</span></div><span class="handle">@anamayaproject</span><dl><dt>Contact</dt><dd>DM <span class="tag tag-n">verify</span></dd><dt>Audience</dt><dd>Madrid conscious-movement event-goers</dd><dt>Fit</dt><dd>The single best audience overlap on this page: people who already buy tickets to immersive wellness events in Madrid.</dd><dt>Ask</dt><dd>Cross-promotion + community code.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Corazón Studio</h4><span class="foll">local</span></div><span class="handle">@corazon__studio</span><dl><dt>Email</dt><dd>hello@corazon-studio.com <span class="tag tag-v">verified</span></dd><dt>Audience</dt><dd>Salamanca premium studio members</dd><dt>Fit</dt><dd>Small following, near-perfect relevance and local purchasing power. Exactly the trade you said you preferred.</dd><dt>Ask</dt><dd>Founding partner (see community email 1).</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>ARO Madrid</h4><span class="foll">local</span></div><span class="handle">@movewitharo</span><dl><dt>Email</dt><dd>hello@movewitharo.com <span class="tag tag-v">verified</span></dd><dt>Audience</dt><dd>Madrid recovery, breathwork and contrast-therapy clients</dd><dt>Fit</dt><dd>Audience already pays for breathwork — no concept education needed.</dd><dt>Ask</dt><dd>Co-billing + member code.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Revive Wellness Hub</h4><span class="foll">local</span></div><span class="handle">@revive_spain</span><dl><dt>Contact</dt><dd>WhatsApp <span class="tag tag-v">verified</span></dd><dt>Audience</dt><dd>Performance recovery, HYROX, sauna and ice</dd><dt>Fit</dt><dd>Performance-first framing matches your positioning better than a yoga audience would.</dd><dt>Ask</dt><dd>Story series + code.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Victoria Studio Madrid</h4><span class="foll">local</span></div><span class="handle">@victoriastudiomadrid</span><dl><dt>Contact</dt><dd>DM <span class="tag tag-n">verify</span></dd><dt>Audience</dt><dd>Almagro + Salamanca boutique members</dd><dt>Fit</dt><dd>Two premium sites in the exact target postcodes.</dd><dt>Ask</dt><dd>Member code + story.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>GONG Club</h4><span class="foll">local</span></div><span class="handle">gong.yoga</span><dl><dt>Email</dt><dd>recepcion@elgong.es <span class="tag tag-v">verified</span></dd><dt>Audience</dt><dd>Chamberí wellness club members</dd><dt>Fit</dt><dd>Already runs functional-breathing workshops — pre-qualified interest.</dd><dt>Ask</dt><dd>Newsletter mention + code.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>BioSpa Madrid</h4><span class="foll">niche</span></div><span class="handle">Velázquez 138</span><dl><dt>Contact</dt><dd><span class="tag tag-n">verify in person</span></dd><dt>Audience</dt><dd>Madrid biohacking early adopters</dd><dt>Fit</dt><dd>Small but the most concept-literate audience in the city.</dd><dt>Ask</dt><dd>Cross-promotion; complimentary place for the founder.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>@f1.espanol</h4><span class="foll">~124k</span></div><span class="handle">Spanish-language F1</span><dl><dt>Contact</dt><dd><span class="tag tag-n">verify in bio</span></dd><dt>Audience</dt><dd>Spanish-speaking F1 followers</dd><dt>Fit</dt><dd>Race-week relevance, though geographically diffuse across Spanish-speaking markets.</dd><dt>Ask</dt><dd>Single race-week story with code. Low priority versus local channels.</dd></dl></div>
+
+<div class="cr"><div class="cr-top"><h4>Dr. Pilar de Frutos</h4><span class="foll">verify</span></div><span class="handle">@dr.pilardefrutos_</span><dl><dt>Contact</dt><dd><span class="tag tag-n">verify in bio</span></dd><dt>Audience</dt><dd>Madrid aesthetics and biohacking clientele</dd><dt>Fit</dt><dd>Madrid-based, biohacking-positioned, with a demonstrably high-spend patient audience.</dd><dt>Ask</dt><dd>Complimentary place + story. Keep all messaging strictly non-medical.</dd></dl></div>
+
+    </div>
+  </div>
+</section>
+
+<section id="channels">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06 / RECOMMENDATION</span>
+      <h2>The five channels most likely to actually sell 30 seats</h2>
+      <p class="sec-sub">Ranked by expected seats per hour of your effort, on an 11-day clock. I've left the obvious answers off deliberately, and said why at the end.</p>
+    </div>
+
+<div class="ch"><div class="ch-h"><h3>Premium studio member lists in Salamanca &amp; Chamberí</h3><span class="ch-rank">1 · 10–14 seats</span></div>
+<p>This is the highest-probability channel and it isn't close. Corazón, ARO, GONG, Revive and Victoria have warm, local, high-income lists whose members already pay premium per-class rates — for them €89 is an upgrade, not a leap. No contract, no procurement, a founder can say yes in one message, and it converts within 48 hours of a send. Everything else on this page is slower.</p>
+<p><strong>Move:</strong> offer one studio per category genuine exclusivity. Exclusivity costs you nothing and is the difference between a studio mentioning you and a studio actually sending a dedicated email.</p>
+<div class="ch-math">3 studios × ~1,500 list × 0.3% conversion ≈ 13 seats</div></div>
+
+<div class="ch"><div class="ch-h"><h3>Club Financiero Génova and Club Matador member channels</h3><span class="ch-rank">2 · 6–10 seats</span></div>
+<p>Pre-assembled memberships of exactly your buyer — Madrid executives and culture-forward high earners — reachable through one internal communication rather than paid media. Génova is doubly valuable because it could be venue and audience at once, which collapses two problems into one conversation. Both have published contact addresses and a reason to say yes: a differentiated member perk during the city's biggest weekend costs them nothing.</p>
+<p><strong>Move:</strong> lead with complimentary places for leadership. It converts the gatekeeper into an attendee, and attendees promote.</p>
+<div class="ch-math">2 clubs × internal comms ≈ 6–10 seats</div></div>
+
+<div class="ch"><div class="ch-h"><h3>Your own direct network, worked manually</h3><span class="ch-rank">3 · 5–8 seats</span></div>
+<p>Unglamorous and routinely skipped in favour of partnership decks. With 30 seats and 11 days, personal invitations from you convert at rates no cold channel approaches — and they convert <em>immediately</em>, which matters because early sales create the social proof that makes later marketing work. The first ten seats sold by hand make the next twenty materially easier.</p>
+<p><strong>Move:</strong> block two hours and send 60 individual WhatsApp messages. Not a broadcast, not a story — sixty individually addressed messages. Expect 10–15%.</p>
+<div class="ch-math">60 personal messages × ~12% ≈ 7 seats</div></div>
+
+<div class="ch"><div class="ch-h"><h3>Founder and executive communities — Impact Hub, EO Madrid</h3><span class="ch-rank">4 · 4–7 seats</span></div>
+<p>Large warm lists (Impact Hub alone is ~800 professionals) with existing internal-comms channels and a standing appetite for member perks. Slower than studios because these are committee-ish organisations, so send tomorrow rather than next week. The positioning — regulation under pressure, not relaxation — lands better with this audience than with a general wellness list.</p>
+<p><strong>Move:</strong> offer revenue share upfront. Community managers are measured on member value, and a commission makes the internal case for them.</p>
+<div class="ch-math">2 communities × ~1,000 reach × 0.3% ≈ 6 seats</div></div>
+
+<div class="ch"><div class="ch-h"><h3>F1 hospitality operators as a Friday-morning add-on</h3><span class="ch-rank">5 · 2–5 seats</span></div>
+<p>The only channel that reaches genuine F1 visitors with real intent and real budget. Edge Global Events, Race Experiences and Grandstand all have Madrid clients with an empty Friday morning before track action, and all sell add-ons already. Lower volume and less certain than the four above — their clients' itineraries may be locked — but the highest purchasing power per person on the page, and the most defensible race-week story.</p>
+<p><strong>Move:</strong> offer commission and hold a named allocation. State plainly in the first line that you are unaffiliated with Formula 1; these operators are contractually sensitive about that, and saying it first builds trust rather than raising a flag.</p>
+<div class="ch-math">3 operators × small allocation ≈ 2–5 seats</div></div>
+
+    <div class="note" style="margin-top:26px">
+      <strong>What I deliberately ranked below these, and why.</strong> <em>Hotel venue partnerships</em> will get you a room, not buyers — a hotel's guests are not a list you can email, and treating venue outreach as a sales channel is the most common way small premium events run out of time. <em>Large F1 creators</em> reach a Spanish-speaking audience dispersed across two continents; you need 30 people who can physically be in central Madrid at 09:00 on a Friday. <em>Paid social</em> cannot build a lookalike audience from a standing start in 11 days at this budget. And <em>Madrid Secreto's</em> million followers are worth less to you than Corazón's fifteen hundred members, because relevance density beats reach when you only need thirty people.
+    </div>
+
+    <div class="note note-teal">
+      <strong>The number that should govern your week.</strong> At roughly 0.3–1% conversion on warm lists, you need <strong>3,000–6,000 warm impressions</strong> to land 30 seats. Every decision this week should be judged against that: does this action put the offer in front of warm, local, high-income people, or does it not? A rooftop confirmation feels like progress and adds zero warm impressions. Sending three studio emails feels like admin and adds several thousand.
+    </div>
+  </div>
+</section>
+
+<section id="gaps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">07 / LIMITS</span>
+      <h2>What I could not verify</h2>
+      <p class="sec-sub">Stated plainly, because you asked for verifiable contacts and the gaps matter as much as the finds.</p>
+    </div>
+    <ul class="tight">
+      <li><strong>No venue rental prices, minimum F&amp;B spends, or hire rates are published</strong> by any of the properties researched. I found none, so I have quoted none — there are no estimates anywhere on this page presented as prices. Ask for these directly, and only after a partnership conversation has been declined.</li>
+      <li><strong>Named individuals rarely have public addresses.</strong> Pedro Echevarría (BLESS, GM), Sara Herrero (Four Seasons, Director of Catering Sales), María Alastuey Blanes (Rosewood, Event Manager) and Marta Casas (Hyatt Centric, events) are all publicly documented in those roles. None has a published direct address. Third-party sites offer "email format" patterns for these domains; I have not used them, because a guessed address is exactly what you asked me not to produce. Route through the department address or switchboard and ask for the person by name.</li>
+      <li><strong>Thirteen of fifteen creator emails need manual in-app verification.</strong> Explained in the creators section — this environment cannot open Instagram bios, and that's where those addresses live.</li>
+      <li><strong>Facilitator name.</strong> Public sources describe <em>Elina</em> Kadaja, not Elena. I've used "Elina" in the draft emails on the assumption it's the same person; if that's wrong, correct all eleven drafts before sending.</li>
+      <li><strong>Rooftop clear-floor capacity for 30 mats is unconfirmed everywhere.</strong> Published capacities are cocktail or banquet figures, which assume standing or seated guests, not 30 people lying down. Every venue conversation needs the clear-floor question asked explicitly.</li>
+      <li><strong>Headset costs are unquoted.</strong> I found no published Madrid rental pricing for 30 wireless units and have not estimated one.</li>
+      <li><strong>Research method.</strong> Direct page fetching was blocked throughout this session by the network proxy, so every contact here comes from search-indexed public sources, each linked in the Source column. Contact details change; re-check anything before a high-stakes send.</li>
+      <li><strong>Trademark discipline.</strong> Nothing in these drafts claims F1 affiliation, and the phrase "Formula 1 weekend" is used descriptively throughout. Keep it that way in paid media, and avoid F1 marks, logos and livery entirely.</li>
+    </ul>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p>Compiled 31 August 2026. 52 prospects; 31 verified direct emails or phone numbers; every source linked inline.</p>
+  <p>Marketing language throughout is limited to breathwork, nervous-system regulation, interoception and somatic practice. No therapeutic or medical claims appear in any draft on this page.</p>
+</div></footer>
+
+<script>
+document.querySelectorAll(".copy").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var el=document.getElementById(btn.dataset.copy);
+    if(!el)return;
+    var txt=el.innerText;
+    navigator.clipboard.writeText(txt).then(function(){
+      var o=btn.textContent;btn.textContent="Copied";
+      setTimeout(function(){btn.textContent=o;},1600);
+    }).catch(function(){
+      var o=btn.textContent;btn.textContent="Select manually";
+      setTimeout(function(){btn.textContent=o;},2000);
+    });
+  });
+});
+</script>
