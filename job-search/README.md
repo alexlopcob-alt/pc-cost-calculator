@@ -13,6 +13,7 @@ Operating files for Alex Cobos's job search. Everything is generated from `MASTE
 | `cv/build_cvs.js` | Builds the three CVs. `node build_cvs.js` regenerates `.docx`; PDFs are printed from the HTML twin with headless Chromium. |
 | `cv/*.docx` | ATS uploads. `cv/*.pdf` for email and LinkedIn. |
 | `AUDIT_LOG/YYYY-MM-DD.md` | One file per daily audit. |
+| `interviews/YYYY-MM-DD_company_stage.md` | Prep pack per interview: logistics, scenarios, stories, questions. |
 | `engine-sync/` | Daily export from the Mac Engine (send log, reports, tracker). Must contain no secrets. |
 
 Tracker of record: Notion "Job Application Tracker → Applications" (32 rows as of 28 Sep 2026).
