@@ -81,3 +81,39 @@ Hola {Nombre}, gracias por la conversación de hoy. Me quedo con dos cosas: {pun
 Hi {First name}, I'm a senior CSM / strategic account manager based in Madrid (Coursera, $11M ARR strategic book, 90%+ renewals, 125% NRR, bilingual ES/EN, MBA LSE), looking at enterprise post-sale roles in Madrid or remote EMEA from EUR 65k base. If you're working anything in that space, I'd welcome a call. Alex Cobos, +34 690 660 128.
 
 Hola {Nombre}, soy Customer Success Manager senior / gestor de cuentas estratégicas en Madrid (Coursera, cartera de 11 M$ de ARR, renovaciones >90 %, NRR 125 %, bilingüe ES/EN, MBA LSE). Busco puestos post-venta enterprise en Madrid o remoto EMEA desde 65k€ base. Si lleváis algún proceso en esa línea, encantado de hablar. Alex Cobos, +34 690 660 128.
+
+## EN — Fractional / interim pitch (email, roles open 30+ days or explicitly fractional)
+
+Subject: {Role title} — a faster way to cover it
+
+Hi {First name},
+
+I noticed the {Role title} role has been open since {month}. While you hire for it, I can cover the book on a fractional basis: {2 or 3} days a week, starting within two weeks, no long-term commitment.
+
+At Coursera I owned an $11M ARR book of 25+ strategic accounts (Volkswagen Group, Novartis, HSBC) at 90%+ renewals and 125% NRR. Since January 2026 I have run the same playbook as a fractional CSM for {client type from MASTER_PROFILE.md}. {One line about their product or customer base, from the JD.}
+
+I'm in Madrid, bilingual Spanish/English, and can start with a two-week renewal-risk review of the accounts you are most worried about.
+
+Worth 20 minutes?
+
+Best,
+Alex Cobos
++34 690 660 128 · linkedin.com/in/alex-cobos-50599618
+
+## ES — Propuesta fractional / interim (email)
+
+Asunto: {Puesto} — una forma más rápida de cubrirlo
+
+Hola {Nombre},
+
+He visto que el puesto de {Puesto} lleva abierto desde {mes}. Mientras cerráis la contratación, puedo cubrir la cartera en modalidad fractional: {2 o 3} días a la semana, incorporación en dos semanas, sin compromiso a largo plazo.
+
+En Coursera gestioné una cartera de 11 M$ de ARR con más de 25 cuentas estratégicas (Volkswagen Group, Novartis, HSBC), con renovaciones por encima del 90 % y NRR del 125 %. Desde enero de 2026 aplico el mismo método como CSM fractional para {tipo de cliente}. {Una línea sobre su producto o su base de clientes, sacada de la oferta.}
+
+Estoy en Madrid, bilingüe español/inglés, y puedo empezar con una revisión de riesgo de renovación de dos semanas sobre las cuentas que más os preocupen.
+
+¿Hablamos 20 minutos?
+
+Un saludo,
+Alex Cobos
++34 690 660 128
