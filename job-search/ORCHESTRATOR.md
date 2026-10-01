@@ -8,11 +8,11 @@ Goal, measured daily: interviews for CSM, KAM and Account Director roles in Madr
 
 | Actor | Does | Never does |
 |---|---|---|
-| Cloud routine "Job search — daily" (08:10 Madrid, fresh session every day) | Reads inbox and calendar, resolves hiring-manager contacts, writes every touch as a Gmail draft, sources Madrid roles, keeps Notion current, steers the Mac Engine by replying in the Engine thread, writes the audit log, emails Alex one brief. | Sends anything to a third party. Answers legal or consent questions. Applies to London or UK roles. |
+| Cloud routine "Job search — daily" (08:10 Madrid, prompt in `ROUTINE_PROMPT.md`) | Reads inbox and calendar, resolves hiring-manager contacts, writes every touch as a Gmail draft, sources Madrid roles, keeps Notion current, steers the Mac Engine by replying in the Engine thread, writes the audit log, emails Alex one brief. | Sends anything to a third party. Answers legal or consent questions. Applies to London or UK roles. |
 | Mac Engine (`~/Desktop/PC/ENGINE/v2/`, launchd) | Scans boards, scores cards, submits Spain cards at fit 7+ on ATS it can reach, queues LinkedIn notes and follow-ups in Alex's Chrome, sends one "Engine —" brief a day. | London or UK anything. Sudo. More than one brief. |
 | Alex | Sends the drafts (10 a day), runs interviews, decides legal, consent, salary and assessment questions, submits on Workday and captcha-walled boards, keeps Chrome and the laptop alive, keeps LinkedIn pending invites under 50. | |
 
-Why fresh sessions: both old routines fired into long-lived sessions that stalled on a single permission prompt and silently skipped the day. A fresh session has nothing to stall on and no context to bloat.
+Binding: the routine fires into the orchestrator session that created it on 1 Oct 2026 (routines created from inside a session cannot carry connectors into a fresh session). Both old routines stalled on a single permission prompt and silently skipped the day; if that happens here, recreate the routine from the claude.ai Routines UI in fresh-session mode with the prompt in `ROUTINE_PROMPT.md` and the Gmail, Notion, Calendar, Apollo and Claude Code Remote connectors enabled.
 
 ## Daily order of operations (the routine prompt follows this)
 
