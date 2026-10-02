@@ -69,7 +69,7 @@ Status column is maintained by the daily audit. Do not apply to a company more t
 | Doist, Buffer, Hotjar (Contentsquare) | Remote-first, CS roles occasionally. | Various | Watch |
 | Contentsquare | Customer Success dept, Madrid/remote roles. | Lever | Watch |
 | dLocal | Spain location filter on Lever; payments AM/CSM. | Lever | Watch |
-| Jobgether partners | Aggregator listing Strategic CSM EMEA remote from Spain. Verify end client before applying. | Lever | Verify |
+| Jobgether partners | Aggregator listing CSM, CS Lead, KAM and Account Director roles remote from Spain on behalf of partner companies. Verify the end client before applying; score only if the client is unnamed. jobgether.com is blocked from the cloud orchestrator, so the Mac Engine scans it daily and the orchestrator tracks the rows. Alex flagged two open roles on 2 Oct 2026. | Lever / partner ATS | Engine scans daily |
 | Lucid Software | Remote EMEA CSM reqs on Greenhouse. | Greenhouse | Verify location |
 | Fingerprint | CSM EMEA applied 25 Sep. | Greenhouse | Applied |
 | Crystal Intelligence | Applied 25 Sep, remote Spain. | Teamtailor | Applied |
