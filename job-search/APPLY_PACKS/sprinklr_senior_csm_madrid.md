@@ -4,7 +4,7 @@ Status 1 Oct 2026: **not submitted.** Sprinklr runs on Workday (sprinklr.wd1.myw
 
 ## Where
 
-1. Go to sprinklr.wd1.myworkdayjobs.com/en-US/careers and search "Customer Success Manager" with location Madrid. The Indeed listing (seen 28 Sep, posted 10 Sep) pointed to a Senior Customer Success Manager, Madrid, 6+ years. There is also a "Senior Customer Success Manager - CCAAS" req; check the location on each before picking.
+1. Direct link (verified live by the Engine on 1 Oct, req 113479): https://sprinklr.wd1.myworkdayjobs.com/careers/job/Spain---Madrid/Senior-Customer-Success-Manager_113479-JOB . If it has moved, search "Customer Success Manager" with location Madrid on sprinklr.wd1.myworkdayjobs.com/en-US/careers. Ignore the "Senior Customer Success Manager - CCAAS" req unless its location is also Madrid.
 2. Sign in or create the Workday account with a generated password from the password manager.
 3. Upload `cv/Alex_Cobos_CV_EN_Madrid.pdf` (or the .docx if the parser prefers it). Do not paste the LinkedIn import; it drags in old titles.
 
