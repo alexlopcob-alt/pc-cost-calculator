@@ -25,7 +25,8 @@ Binding: the routine fires into the orchestrator session that created it on 1 Oc
 7. **Steer the Engine**: reply once in the latest "Engine —" thread with decisions the standing rules settle (yes or no by card id), the London count (must be 0), and any rule change. Count violations.
 8. **Notion hygiene**: stage changes, rejection reasons, next action dates. No row without Location and Fit.
 9. **Audit log**: `AUDIT_LOG/<date>.md` with the headings used in this folder. Commit and push to the branch.
-10. **One email to Alex**: subject `Job search — <date> — Madrid interviews <n> | <m> to act on`, plain text, under 400 words, the three things Alex must do today first, then numbers vs yesterday, misses, drafts ready to send, new Madrid roles, violations. No street address, passcodes or join links. Send it even if a step failed and say what failed.
+10. **Proactive moves**: from the last 7 days of rejections, interview invites and replies, name up to three actions that would raise interviews or cut rejections, each with the evidence behind it and who does it. Do the ones that are yours the same day; put Alex's in the email.
+11. **One email to Alex**: subject `Job search — <date> — Madrid interviews <n> | <m> to act on`, plain text, under 400 words, the three things Alex must do today first, then numbers vs yesterday, misses, drafts ready to send, new Madrid roles, proactive moves, violations. No street address, passcodes or join links. Send it even if a step failed and say what failed.
 
 ## Standing rules (short form)
 
